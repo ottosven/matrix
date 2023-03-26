@@ -5,6 +5,8 @@ This short lecture note series provides a brief introduction to the most relevan
 
 # Basic definitions
 
+Let's start with some basic definitions and specific examples.
+
 ## Scalar, vector, and matrix
 
 A **scalar** $a$ is a single real number. We write $a \in \mathbb R$.
