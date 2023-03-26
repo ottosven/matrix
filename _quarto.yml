@@ -40,3 +40,5 @@ format:
         fig.align: center
     fig-align: center
   
+resources:
+  - CNAME
