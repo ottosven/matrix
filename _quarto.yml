@@ -3,7 +3,7 @@ project:
   output-dir: docs
   
 book:
-  title: A crash course on matrix algebra in R
+  title: Crash Course on Matrix Algebra in R
   # repo-url: https://github.com/ottosven/rintro
   # repo-actions: [edit, issue]
   # downloads: [pdf]

@@ -1,3 +1,8 @@
+
+Due to the multivariate character of many econometric topics, matrix algebra is a commonly used tool in modern econometrics.
+It provides a powerful and efficient framework for representing and manipulating systems of linear equations.
+This short lecture note series provides a brief introduction to the most relevant matrix algebra concepts for econometricians and their implementation in R
+
 # Basic definitions
 
 ## Scalar, vector, and matrix
