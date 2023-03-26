@@ -18,6 +18,7 @@ book:
   open-graph: true
   chapters:
     - index.qmd
+    - 01_basics.qmd
     - 02_multiplication.qmd
     - 03_inverse.qmd
     - 04_furtherconcepts.qmd
