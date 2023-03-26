@@ -1,0 +1,74 @@
+# Matrix calculus
+
+Let $f(\beta_1, \ldots, \beta_k) = f(\boldsymbol{\beta})$ be a
+twice-differential real-valued function that depends on some vector
+$\boldsymbol \beta = (\beta_1, \ldots, \beta_k)'$. Examples that
+frequently appear in econometrics are functions of the inner product
+form $f(\boldsymbol \beta) = \boldsymbol a' \boldsymbol \beta$, where
+$\boldsymbol a \in \mathbb R^k$, and functions of the sandwich form
+$f(\boldsymbol \beta) = \boldsymbol \beta' \boldsymbol A \boldsymbol \beta$,
+where $\boldsymbol A \in \mathbb R^{k \times k}$.
+
+## Gradient
+
+The **first derivatives vector** or **gradient** is $$
+\frac{\partial f(\boldsymbol \beta)}{\partial\boldsymbol{\beta}}  = \begin{pmatrix}\frac{\partial f(\boldsymbol \beta)}{\partial \beta_1} \\ \vdots \\ \frac{\partial f(\boldsymbol \beta)}{\partial \beta_k} \end{pmatrix}
+$$ If the gradient is evaluated at some particular value
+$\boldsymbol \beta = \boldsymbol b$, we write $$
+\frac{\partial f}{\partial\boldsymbol{\beta}}(\boldsymbol b)
+$$ Useful properties for inner product and sandwich forms are
+\begin{align*}
+(i)& \quad &&\frac{\partial (\boldsymbol a' \boldsymbol \beta)}{\partial \boldsymbol \beta}  = \boldsymbol a \\
+(ii)& \quad &&\frac{\partial ( \boldsymbol \beta' \boldsymbol A \boldsymbol \beta)}{\partial \boldsymbol \beta}   = (\boldsymbol A + \boldsymbol A') \boldsymbol \beta.
+\end{align*}
+
+## Hessian
+
+The **second derivatives matrix** or **Hessian** is the $k \times k$
+matrix $$
+    \frac{\partial^2 f(\boldsymbol \beta)}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}
+    =  \begin{pmatrix}\frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_1 \partial \beta_1} & \ldots & \frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_k \partial \beta_1} \\ 
+    \vdots & & \vdots \\
+    \frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_1 \partial \beta_k} & \ldots & \frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_k \partial \beta_k}
+    \end{pmatrix}.$$
+
+If the Hessian is evaluated at some particular value
+$\boldsymbol \beta = \boldsymbol b$, we write $$
+\frac{\partial^2 f}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}(\boldsymbol b)
+$$
+
+The Hessian is symmetric. Each column of the Hessian is the derivative
+of the components of the gradient for the corresponding variable in
+$\boldsymbol \beta'$:
+
+```{=tex}
+\begin{align*}
+\frac{\partial^2 f(\boldsymbol \beta)}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}
+    &= \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \boldsymbol \beta'} \\
+    &= \Bigg[ \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \beta_1} \ \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \beta_2} \ \ldots \ \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \beta_n} \Bigg]
+\end{align*}
+```
+The Hessian of a sandwich form function is $$
+  \frac{\partial^2 ( \boldsymbol \beta' \boldsymbol A \boldsymbol \beta)}{\partial \boldsymbol \beta \partial \boldsymbol \beta'}  = \boldsymbol A + \boldsymbol A'.
+$$
+
+## Optimization
+
+Recall the *first-order* (necessary) and *second-order* (sufficient)
+conditions for optimum (maximum or minimum) in the univariate case:
+
+-   **First-order condition**: the first derivative evaluated at the
+    optimum is zero.
+-   **Second-order condition**: the second derivative at the optimum is
+    negative for a maximum and positive for a minimum.
+
+Similarly, we formulate first and second-order conditions for a function
+$f(\boldsymbol \beta)$. The **first-order condition** for an optimum
+(maximum or minimum) at $\boldsymbol b$ is $$
+  \frac{\partial f}{\partial\boldsymbol{\beta}}(\boldsymbol b)  = \boldsymbol 0.
+$$ The **second-order condition** is \begin{align*}
+  &\frac{\partial^2 f}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}(\boldsymbol b) > 0 \quad \text{for a minimum at} \ \boldsymbol b, \\
+  &\frac{\partial^2 f}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}(\boldsymbol b) < 0 \quad \text{for a maximum at} \ \boldsymbol b.
+\end{align*} Recall that, in the context of matrices, the notation
+"$> 0$" means positive definite, and "$< 0$" means negative definite.
+

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.56">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>A crash course on matrix algebra in R - 4&nbsp; Further matrix concepts</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_calculus.html" rel="next">
+<link href="./03_inverse.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<meta property="og:title" content="A crash course on matrix algebra in R - 4&nbsp; Further matrix concepts">
+<meta property="og:description" content="The trace of a \(k \times k\) square matrix \(\boldsymbol A\) is the sum of the diagonal entries: \[\mathop{\mathrm{tr}}(\boldsymbol A) = \sum_{i=1}^n a_{ii}\] Example: \[
+\boldsymbol A =…">
+<meta property="og:site-name" content="A crash course on matrix algebra in R">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Further matrix concepts</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A crash course on matrix algebra in R</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic definitions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_multiplication.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summation and multiplication</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_inverse.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rank and inverse</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_furtherconcepts.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Further matrix concepts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Matrix calculus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_exercises.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Problems</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#trace" id="toc-trace" class="nav-link active" data-scroll-target="#trace"><span class="toc-section-number">4.1</span>  Trace</a></li>
+  <li><a href="#idempotent-matrx" id="toc-idempotent-matrx" class="nav-link" data-scroll-target="#idempotent-matrx"><span class="toc-section-number">4.2</span>  Idempotent matrx</a></li>
+  <li>
+<a href="#eigendecomposition" id="toc-eigendecomposition" class="nav-link" data-scroll-target="#eigendecomposition"><span class="toc-section-number">4.3</span>  Eigendecomposition</a>
+  <ul class="collapse">
+<li><a href="#eigenvalues" id="toc-eigenvalues" class="nav-link" data-scroll-target="#eigenvalues"><span class="toc-section-number">4.3.1</span>  Eigenvalues</a></li>
+  <li><a href="#eigenvectors" id="toc-eigenvectors" class="nav-link" data-scroll-target="#eigenvectors"><span class="toc-section-number">4.3.2</span>  Eigenvectors</a></li>
+  <li><a href="#spectral-decomposition" id="toc-spectral-decomposition" class="nav-link" data-scroll-target="#spectral-decomposition"><span class="toc-section-number">4.3.3</span>  Spectral decomposition</a></li>
+  <li><a href="#eigendecomposition-in-r" id="toc-eigendecomposition-in-r" class="nav-link" data-scroll-target="#eigendecomposition-in-r"><span class="toc-section-number">4.3.4</span>  Eigendecomposition in <code>R</code></a></li>
+  </ul>
+</li>
+  <li><a href="#definite-matrix" id="toc-definite-matrix" class="nav-link" data-scroll-target="#definite-matrix"><span class="toc-section-number">4.4</span>  Definite matrix</a></li>
+  <li><a href="#cholesky-decomposition" id="toc-cholesky-decomposition" class="nav-link" data-scroll-target="#cholesky-decomposition"><span class="toc-section-number">4.5</span>  Cholesky decomposition</a></li>
+  <li><a href="#vectorization" id="toc-vectorization" class="nav-link" data-scroll-target="#vectorization"><span class="toc-section-number">4.6</span>  Vectorization</a></li>
+  <li><a href="#kronecker-product" id="toc-kronecker-product" class="nav-link" data-scroll-target="#kronecker-product"><span class="toc-section-number">4.7</span>  Kronecker product</a></li>
+  <li><a href="#vector-and-matrix-norm" id="toc-vector-and-matrix-norm" class="nav-link" data-scroll-target="#vector-and-matrix-norm"><span class="toc-section-number">4.8</span>  Vector and matrix norm</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Further matrix concepts</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><section id="trace" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="trace">
+<span class="header-section-number">4.1</span> Trace</h2>
+<p>The <strong>trace</strong> of a <span class="math inline">\(k \times k\)</span> square matrix <span class="math inline">\(\boldsymbol A\)</span> is the sum of the diagonal entries: <span class="math display">\[\mathop{\mathrm{tr}}(\boldsymbol A) = \sum_{i=1}^n a_{ii}\]</span> <em>Example:</em> <span class="math display">\[
+\boldsymbol A = \begin{pmatrix}
+1 &amp; 2 &amp; 3 \\ 3 &amp; 9 &amp; 1 \\ 0 &amp; 11 &amp; 5
+\end{pmatrix} \quad \Rightarrow \quad \mathop{\mathrm{tr}}(\boldsymbol A) = 1+9+5 = 15
+\]</span> In <code>R</code>we have</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">9</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span>  <span class="co">#trace = sum of diagonal entries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<p>The following properties hold for square matrices <span class="math inline">\(\boldsymbol A\)</span> and <span class="math inline">\(\boldsymbol B\)</span> and scalars <span class="math inline">\(\lambda\)</span>:</p>
+<ol type="i">
+<li><span class="math inline">\(\mathop{\mathrm{tr}}(\lambda \boldsymbol A) = \lambda \mathop{\mathrm{tr}}(\boldsymbol A)\)</span></li>
+<li><span class="math inline">\(\mathop{\mathrm{tr}}(\boldsymbol A + \boldsymbol B) = \mathop{\mathrm{tr}}(\boldsymbol A) + \mathop{\mathrm{tr}}(\boldsymbol B)\)</span></li>
+<li><span class="math inline">\(\mathop{\mathrm{tr}}(\boldsymbol A') = \mathop{\mathrm{tr}}(\boldsymbol A)\)</span></li>
+<li><span class="math inline">\(\mathop{\mathrm{tr}}(\boldsymbol I_k) = k\)</span></li>
+</ol>
+<p>For <span class="math inline">\(\boldsymbol A\in \mathbb R^{k \times m}\)</span> and <span class="math inline">\(\boldsymbol B \in \mathbb R^{m \times k}\)</span> we have <span class="math display">\[
+\mathop{\mathrm{tr}}(\boldsymbol A \boldsymbol B) = \mathop{\mathrm{tr}}(\boldsymbol B \boldsymbol A).
+\]</span></p>
+</section><section id="idempotent-matrx" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="idempotent-matrx">
+<span class="header-section-number">4.2</span> Idempotent matrx</h2>
+<p>The square matrix <span class="math inline">\(\boldsymbol A\)</span> is called <strong>idempotent</strong> if <span class="math inline">\(\boldsymbol A \boldsymbol A = \boldsymbol A\)</span>. The identity matrix is idempotent: <span class="math inline">\(\boldsymbol I_n \boldsymbol I_n = \boldsymbol I_n\)</span>. Another example is the matrix <span class="math display">\[
+\boldsymbol A = \begin{pmatrix}
+4 &amp; -1 \\ 12 &amp; -3
+\end{pmatrix}.
+\]</span> We have <span class="math display">\[\begin{align*}
+\boldsymbol A \boldsymbol A
+&amp;= \begin{pmatrix}
+4 &amp; -1 \\ 12 &amp; -3
+\end{pmatrix}
+\begin{pmatrix}
+4 &amp; -1 \\ 12 &amp; -3
+\end{pmatrix} \\
+&amp;= \begin{pmatrix}
+16-12 &amp; -4+3 \\ 48-36 &amp; -12+9
+\end{pmatrix} \\
+&amp;= \begin{pmatrix}
+4 &amp; -1 \\ 12 &amp; -3
+\end{pmatrix}
+= \boldsymbol A.
+\end{align*}\]</span></p>
+</section><section id="eigendecomposition" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="eigendecomposition">
+<span class="header-section-number">4.3</span> Eigendecomposition</h2>
+<section id="eigenvalues" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="eigenvalues">
+<span class="header-section-number">4.3.1</span> Eigenvalues</h3>
+<p>An <strong>eigenvalue</strong> <span class="math inline">\(\lambda\)</span> of a <span class="math inline">\(k \times k\)</span> square matrix is a solution to the equation <span class="math display">\[
+  \det(\lambda \boldsymbol I_k - \boldsymbol A) = 0.
+\]</span> The function <span class="math inline">\(f(\lambda) = \det(\lambda \boldsymbol I_k - \boldsymbol A)\)</span> has exactly <span class="math inline">\(k\)</span> roots so that <span class="math inline">\(\det(\lambda \boldsymbol I_k - \boldsymbol A) = 0\)</span> has exactly <span class="math inline">\(k\)</span> solutions. The solutions <span class="math inline">\(\lambda_1, \ldots, \lambda_k\)</span> are the <span class="math inline">\(k\)</span> eigenvalues of <span class="math inline">\(\boldsymbol A\)</span>.</p>
+<p>Most applications of eigenvalues in econometrics concern symmetric matrices. In this case, all eigenvalues are real-valued. In the case of non-symmetric matrices, some eigenvalues may be complex-valued.</p>
+<p>Useful properties of the eigenvalues of a symmetric <span class="math inline">\(k \times k\)</span> matrix are:</p>
+<ol type="i">
+<li><span class="math inline">\(\det(\boldsymbol A) = \lambda_1 \cdot \ldots \cdot \lambda_k\)</span></li>
+<li><span class="math inline">\(\mathop{\mathrm{tr}}(\boldsymbol A) = \lambda_1 + \ldots + \lambda_k\)</span></li>
+<li>
+<span class="math inline">\(\boldsymbol A\)</span> is nonsingular if and only if all eigenvalues are nonzero</li>
+<li>
+<span class="math inline">\(\boldsymbol A \boldsymbol B\)</span> and <span class="math inline">\(\boldsymbol B \boldsymbol A\)</span> have the same eigenvalues.</li>
+</ol></section><section id="eigenvectors" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="eigenvectors">
+<span class="header-section-number">4.3.2</span> Eigenvectors</h3>
+<p>If <span class="math inline">\(\lambda_i\)</span> is an eigenvalue of <span class="math inline">\(\boldsymbol A\)</span>, then <span class="math inline">\(\lambda_i \boldsymbol I_k - \boldsymbol A\)</span> is singular, which implies that there exists a linear combination vector <span class="math inline">\(\boldsymbol v_i\)</span> with <span class="math inline">\((\lambda_i \boldsymbol I_k - \boldsymbol A) \boldsymbol v_i = \boldsymbol 0\)</span>. Equivalently, <span class="math display">\[
+  \boldsymbol A \boldsymbol v_i = \lambda_i \boldsymbol v_i,
+\]</span> which can be solved by Gaussian elimination. It is convenient to normalize any solution such that <span class="math inline">\(\boldsymbol v_i'\boldsymbol v_i = 1\)</span>. The solutions <span class="math inline">\(\boldsymbol v_1, \ldots, \boldsymbol v_k\)</span> are called eigenvectors of <span class="math inline">\(\boldsymbol A\)</span> to corresponding eigenvalues <span class="math inline">\(\lambda_1, \ldots, \lambda_k\)</span>.</p>
+</section><section id="spectral-decomposition" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="spectral-decomposition">
+<span class="header-section-number">4.3.3</span> Spectral decomposition</h3>
+<p>If <span class="math inline">\(\boldsymbol A\)</span> is symmetric, then <span class="math inline">\(\boldsymbol v_1, \ldots, \boldsymbol v_k\)</span> are pairwise orthogonal (i.e., <span class="math inline">\(\boldsymbol v_i' \boldsymbol v_j\)</span> for <span class="math inline">\(i \neq j\)</span>). Let <span class="math inline">\(\boldsymbol V = \begin{pmatrix} \boldsymbol v_1 &amp; \ldots &amp; \boldsymbol v_k \end{pmatrix}\)</span> be the <span class="math inline">\(k \times k\)</span> matrix of eigenvectors and let <span class="math inline">\(\boldsymbol \Lambda = \mathop{\mathrm{diag}}(\lambda_1, \ldots, \lambda_k)\)</span> be the <span class="math inline">\(k \times k\)</span> diagonal matrix with the eigenvalues on the main diagonal. Then, we can write <span class="math display">\[
+  \boldsymbol A = \boldsymbol V \boldsymbol \Lambda \boldsymbol V',
+\]</span> which is called the <strong>spectral decomposition</strong> of <span class="math inline">\(\boldsymbol A\)</span>. The matrix of eigenvalues can be written as <span class="math inline">\(\boldsymbol \Lambda = \boldsymbol V' \boldsymbol A \boldsymbol V\)</span>.</p>
+</section><section id="eigendecomposition-in-r" class="level3" data-number="4.3.4"><h3 data-number="4.3.4" class="anchored" data-anchor-id="eigendecomposition-in-r">
+<span class="header-section-number">4.3.4</span> Eigendecomposition in <code>R</code>
+</h3>
+<p>The function <code><a href="https://rdrr.io/r/base/eigen.html">eigen()</a></code> computes the eigenvalues and corresponding eigenvectors.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">B</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">A</span> </span>
+<span><span class="va">B</span> <span class="co">#A'A is symmetric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]   10   29    6
+[2,]   29  206   70
+[3,]    6   70   35</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span> <span class="co">#eigenvalues and eigenvector matrix</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>eigen() decomposition
+$values
+[1] 234.827160  12.582227   3.590613
+
+$vectors
+           [,1]       [,2]       [,3]
+[1,] -0.1293953 -0.5312592  0.8372697
+[2,] -0.9346164 -0.2167553 -0.2819739
+[3,] -0.3312839  0.8190121  0.4684764</code></pre>
+</div>
+</div>
+</section></section><section id="definite-matrix" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="definite-matrix">
+<span class="header-section-number">4.4</span> Definite matrix</h2>
+<p>The <span class="math inline">\(k \times k\)</span> square matrix <span class="math inline">\(\boldsymbol{A}\)</span> is called <strong>positive definite</strong> if <span class="math display">\[\boldsymbol{c}'\boldsymbol{Ac}&gt;0\]</span> holds for all nonzero vectors <span class="math inline">\(\boldsymbol{c}\in \mathbb{R}^k\)</span>. If <span class="math display">\[\boldsymbol{c}'\boldsymbol{Ac}\geq 0\]</span> for all vectors <span class="math inline">\(\boldsymbol{c}\in \mathbb{R}^k\)</span>, the matrix is called <strong>positive semi-definite</strong>. Analogously, <span class="math inline">\(\boldsymbol A\)</span> is called <strong>negative definite</strong> if <span class="math inline">\(\boldsymbol{c}'\boldsymbol{Ac}&lt;0\)</span> and <strong>negative semi-definite</strong> if <span class="math inline">\(\boldsymbol{c}'\boldsymbol{Ac}\leq 0\)</span> for all nonzero vectors <span class="math inline">\(\boldsymbol c \in \mathbb R^k\)</span>. A matrix that is neither positive semi-definite nor negative semi-definite is called <strong>indefinite</strong></p>
+<p>The definiteness property of a symmetric matrix <span class="math inline">\(\boldsymbol A\)</span> can be determined using its eigenvalues:</p>
+<ol type="i">
+<li>
+<span class="math inline">\(\boldsymbol A\)</span> is positive definite &nbsp;<span class="math inline">\(\Leftrightarrow\)</span> &nbsp;all eigenvalues of <span class="math inline">\(\boldsymbol A\)</span> are strictly positive</li>
+<li>
+<span class="math inline">\(\boldsymbol A\)</span> is negative definite &nbsp;<span class="math inline">\(\Leftrightarrow\)</span> &nbsp; all eigenvalues of <span class="math inline">\(\boldsymbol A\)</span> are strictly negative</li>
+<li>
+<span class="math inline">\(\boldsymbol A\)</span> is positive semi-definite &nbsp;<span class="math inline">\(\Leftrightarrow\)</span> &nbsp; all eigenvalues of <span class="math inline">\(\boldsymbol A\)</span> are non-negative</li>
+<li>
+<span class="math inline">\(\boldsymbol A\)</span> is negative semi-definite &nbsp;<span class="math inline">\(\Leftrightarrow\)</span> &nbsp; all eigenvalues of <span class="math inline">\(\boldsymbol A\)</span> are non-positive</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span><span class="op">$</span><span class="va">values</span> <span class="co">#B is positive definite (all eigenvalues positive)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 234.827160  12.582227   3.590613</code></pre>
+</div>
+</div>
+<p>The matrix analog of a positive or negative number (scalar) is a positive definite or negative definite matrix. Therefore, we use the notation</p>
+<ol type="i">
+<li>
+<span class="math inline">\(\boldsymbol A &gt; 0\)</span> &nbsp;if <span class="math inline">\(\boldsymbol A\)</span> is positive definite</li>
+<li>
+<span class="math inline">\(\boldsymbol A &lt; 0\)</span> &nbsp;if <span class="math inline">\(\boldsymbol A\)</span> is negative definite</li>
+<li>
+<span class="math inline">\(\boldsymbol A \geq 0\)</span> &nbsp;if <span class="math inline">\(\boldsymbol A\)</span> is positive semi-definite</li>
+<li>
+<span class="math inline">\(\boldsymbol A \leq 0\)</span> &nbsp;if <span class="math inline">\(\boldsymbol A\)</span> is negative semi-definite</li>
+</ol>
+<p>The notation <span class="math inline">\(\boldsymbol A &gt; \boldsymbol B\)</span> means that the matrix <span class="math inline">\(\boldsymbol A - \boldsymbol B\)</span> is positive definite.</p>
+</section><section id="cholesky-decomposition" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="cholesky-decomposition">
+<span class="header-section-number">4.5</span> Cholesky decomposition</h2>
+<p>Any positive definite and symmetric matrix <span class="math inline">\(\boldsymbol B\)</span> can be written as <span class="math display">\[
+  \boldsymbol B = \boldsymbol P \boldsymbol P',
+\]</span> where <span class="math inline">\(P\)</span> is a lower triangular matrix with strictly positive diagonal entries <span class="math inline">\(p_{jj} &gt; 0\)</span>. This representation is called <strong>Cholesky decomposition</strong>. The matrix <span class="math inline">\(\boldsymbol P\)</span> is unique. For a <span class="math inline">\(2 \times 2\)</span> matrix <span class="math inline">\(\boldsymbol B\)</span> we have <span class="math display">\[\begin{align*}
+\begin{pmatrix} b_{11} &amp; b_{12} \\ b_{21} &amp; b_{22} \end{pmatrix}
+&amp;= \begin{pmatrix} p_{11} &amp; 0 \\ p_{21} &amp; p_{22} \end{pmatrix}
+\begin{pmatrix} p_{11} &amp; p_{21} \\ 0 &amp; p_{22} \end{pmatrix} \\
+&amp;= \begin{pmatrix} p_{11}^2 &amp; p_{11} p_{21} \\ p_{11} p_{21} &amp; p_{21}^2 + p_{22}^2 \end{pmatrix},
+\end{align*}\]</span> which implies <span class="math inline">\(p_{11} = \sqrt{b_{11}}\)</span>, <span class="math inline">\(p_{21} = b_{21}/p_{11}\)</span>, and <span class="math inline">\(p_{22} = \sqrt{b_{22} - p_{21}^2}\)</span>. For a <span class="math inline">\(3 \times 3\)</span> matrix we obtain</p>
+<p><span class="math display">\[\begin{align*}
+\begin{pmatrix} b_{11} &amp; b_{12} &amp; b_{31} \\ b_{21} &amp; b_{22} &amp; b_{23} \\ b_{31} &amp; b_{32} &amp; b_{33} \end{pmatrix}
+= \begin{pmatrix} p_{11} &amp; 0 &amp; 0 \\ p_{21} &amp; p_{22} &amp; 0 \\ p_{31} &amp; p_{32} &amp; p_{33} \end{pmatrix}
+\begin{pmatrix} p_{11} &amp; p_{21} &amp; p_{31} \\ 0 &amp; p_{22} &amp; p_{32} \\ 0 &amp; 0 &amp; p_{33}\end{pmatrix} \\
+= \begin{pmatrix} p_{11}^2 &amp; p_{11} p_{21} &amp; p_{11} p_{31} \\ p_{11} p_{21} &amp; p_{21}^2 + p_{22}^2 &amp; p_{21} p_{31} + p_{22} p_{32} \\ p_{11}p_{31} &amp; p_{21}p_{31} + p_{22}p_{32} &amp; p_{31}^2 + p_{32}^2  + p_{33}^2\end{pmatrix},
+\end{align*}\]</span> which implies</p>
+<span class="math display">\[\begin{gather*}
+p_{11}=\sqrt{b_{11}}, \ \ p_{21} = \frac{b_{21}}{p_{11}}, \ \ p_{31} = \frac{b_{31}}{p_{11}}, \ \ p_{22} = \sqrt{b_{22}-p_{21}^2}, \\
+p_{32}= \frac{b_{32}-p_{21}p_{31}}{p_{22}}, \ \ p_{33} = \sqrt{b_{33} - p_{31}^2 - p_{32}^2}.
+\end{gather*}\]</span>
+<p>Let’s compute the Cholesky decomposition of <span class="math display">\[
+\boldsymbol B = \begin{pmatrix} 1 &amp; -0.5 &amp; 0.6 \\ -0.5 &amp; 1 &amp; 0.25 \\ 0.6 &amp; 0.25 &amp; 1 \end{pmatrix}
+\]</span> using the <code>R</code> function <code><a href="https://rdrr.io/r/base/chol.html">chol()</a></code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">B</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">0.25</span>, <span class="fl">0.6</span>, <span class="fl">0.25</span>, <span class="fl">1</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/chol.html">chol</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]       [,2]      [,3]
+[1,]    1 -0.5000000 0.6000000
+[2,]    0  0.8660254 0.6350853
+[3,]    0  0.0000000 0.4864840</code></pre>
+</div>
+</div>
+</section><section id="vectorization" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="vectorization">
+<span class="header-section-number">4.6</span> Vectorization</h2>
+<p>The <strong>vectorization operator</strong> <span class="math inline">\(\mathop{\mathrm{vec}}()\)</span> stacks the matrix entries column-wise into a large vector. The vectorized <span class="math inline">\(k \times m\)</span> matrix <span class="math inline">\(\boldsymbol A\)</span> is the <span class="math inline">\(km \times 1\)</span> vector <span class="math display">\[
+\mathop{\mathrm{vec}}(\boldsymbol A) = (a_{11}, \ldots, a_{k1}, a_{12}, \ldots, a_{k2}, \ldots, a_{1m}, \ldots, a_{km})'.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span> <span class="co">#vectorize the matrix A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  3  0  2  9 11  3  1  5</code></pre>
+</div>
+</div>
+</section><section id="kronecker-product" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="kronecker-product">
+<span class="header-section-number">4.7</span> Kronecker product</h2>
+<p>The <strong>Kronecker product</strong> <span class="math inline">\(\otimes\)</span> multiplies each element of the left-hand side matrix with the entire matrix on the right-hand side. For a <span class="math inline">\(k \times m\)</span> matrix <span class="math inline">\(\boldsymbol A\)</span> and a <span class="math inline">\(r \times s\)</span> matrix <span class="math inline">\(\boldsymbol B\)</span>, we get the <span class="math inline">\(kr\times ms\)</span> matrix <span class="math display">\[
+A \otimes B = \begin{pmatrix} a_{11}\boldsymbol B &amp; \ldots &amp; a_{1m}\boldsymbol B \\ \vdots &amp; &amp; \vdots \\ a_{k1}\boldsymbol B &amp; \ldots &amp; a_{km}\boldsymbol B \end{pmatrix},
+\]</span> where each entry <span class="math inline">\(a_{ij} \boldsymbol B\)</span> is a <span class="math inline">\(r \times s\)</span> matrix.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span> <span class="op"><a href="https://rdrr.io/r/base/kronecker.html">%x%</a></span> <span class="va">B</span> <span class="co">#Kronecker product in R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]  [,2] [,3] [,4]  [,5]  [,6] [,7]  [,8] [,9]
+ [1,]  1.0 -0.50 0.60  2.0 -1.00  1.20  3.0 -1.50 1.80
+ [2,] -0.5  1.00 0.25 -1.0  2.00  0.50 -1.5  3.00 0.75
+ [3,]  0.6  0.25 1.00  1.2  0.50  2.00  1.8  0.75 3.00
+ [4,]  3.0 -1.50 1.80  9.0 -4.50  5.40  1.0 -0.50 0.60
+ [5,] -1.5  3.00 0.75 -4.5  9.00  2.25 -0.5  1.00 0.25
+ [6,]  1.8  0.75 3.00  5.4  2.25  9.00  0.6  0.25 1.00
+ [7,]  0.0  0.00 0.00 11.0 -5.50  6.60  5.0 -2.50 3.00
+ [8,]  0.0  0.00 0.00 -5.5 11.00  2.75 -2.5  5.00 1.25
+ [9,]  0.0  0.00 0.00  6.6  2.75 11.00  3.0  1.25 5.00</code></pre>
+</div>
+</div>
+</section><section id="vector-and-matrix-norm" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="vector-and-matrix-norm">
+<span class="header-section-number">4.8</span> Vector and matrix norm</h2>
+<p>A norm <span class="math inline">\(\|\cdot\|\)</span> of a vector or a matrix is a measure of distance from the origin. The most commonly used norms are the Euclidean vector norm <span class="math display">\[
+  \|\boldsymbol a\| = \sqrt{\boldsymbol a' \boldsymbol a} = \sqrt{\sum_{i=1}^k a_i^2}
+\]</span> for <span class="math inline">\(\boldsymbol a \in \mathbb R^k\)</span>, and the Frobenius matrix norm <span class="math display">\[
+  \|\boldsymbol A \| = \sqrt{\sum_{i=1}^k \sum_{j=1}^m a_{ij}^2}
+\]</span> for <span class="math inline">\(\boldsymbol A \in \mathbb R^{k \times m}\)</span>.</p>
+<p>A norm satisfies the following properties:</p>
+<ol type="i">
+<li>
+<span class="math inline">\(\|\lambda \boldsymbol A\| = |\lambda| \|\boldsymbol A\|\)</span> for any scalar <span class="math inline">\(\lambda\)</span> (absolute homogeneity)</li>
+<li>
+<span class="math inline">\(\|\boldsymbol A + \boldsymbol B\| \leq \|\boldsymbol A\| + \|\boldsymbol B\|\)</span> (triangle inequality)</li>
+<li>
+<span class="math inline">\(\|\boldsymbol A\| = 0\)</span> implies <span class="math inline">\(\boldsymbol A = \boldsymbol 0\)</span> (definiteness)</li>
+</ol>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03_inverse.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rank and inverse</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_calculus.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Matrix calculus</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

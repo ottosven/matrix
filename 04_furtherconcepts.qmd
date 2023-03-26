@@ -1,0 +1,249 @@
+# Further matrix concepts
+
+## Trace
+
+The **trace** of a $k \times k$ square matrix $\boldsymbol A$ is the sum
+of the diagonal entries:
+$$\mathop{\mathrm{tr}}(\boldsymbol A) = \sum_{i=1}^n a_{ii}$$ *Example:*
+$$
+\boldsymbol A = \begin{pmatrix}
+1 & 2 & 3 \\ 3 & 9 & 1 \\ 0 & 11 & 5
+\end{pmatrix} \quad \Rightarrow \quad \mathop{\mathrm{tr}}(\boldsymbol A) = 1+9+5 = 15
+$$ In `R`we have
+
+```{r}
+A = matrix(c(1,3,0,2,9,11,3,1,5), nrow=3)
+sum(diag(A))  #trace = sum of diagonal entries
+```
+
+The following properties hold for square matrices $\boldsymbol A$ and
+$\boldsymbol B$ and scalars $\lambda$:
+
+i)  $\mathop{\mathrm{tr}}(\lambda \boldsymbol A) = \lambda \mathop{\mathrm{tr}}(\boldsymbol A)$
+ii) $\mathop{\mathrm{tr}}(\boldsymbol A + \boldsymbol B) = \mathop{\mathrm{tr}}(\boldsymbol A) + \mathop{\mathrm{tr}}(\boldsymbol B)$
+iii) $\mathop{\mathrm{tr}}(\boldsymbol A') = \mathop{\mathrm{tr}}(\boldsymbol A)$
+iv) $\mathop{\mathrm{tr}}(\boldsymbol I_k) = k$
+
+For $\boldsymbol A\in \mathbb R^{k \times m}$ and
+$\boldsymbol B \in \mathbb R^{m \times k}$ we have $$
+\mathop{\mathrm{tr}}(\boldsymbol A \boldsymbol B) = \mathop{\mathrm{tr}}(\boldsymbol B \boldsymbol A).
+$$
+
+## Idempotent matrx
+
+The square matrix $\boldsymbol A$ is called **idempotent** if
+$\boldsymbol A \boldsymbol A = \boldsymbol A$. The identity matrix is
+idempotent: $\boldsymbol I_n \boldsymbol I_n = \boldsymbol I_n$. Another
+example is the matrix $$
+\boldsymbol A = \begin{pmatrix}
+4 & -1 \\ 12 & -3
+\end{pmatrix}.
+$$ We have \begin{align*}
+\boldsymbol A \boldsymbol A 
+&= \begin{pmatrix}
+4 & -1 \\ 12 & -3
+\end{pmatrix}
+\begin{pmatrix}
+4 & -1 \\ 12 & -3
+\end{pmatrix} \\
+&= \begin{pmatrix}
+16-12 & -4+3 \\ 48-36 & -12+9
+\end{pmatrix} \\
+&= \begin{pmatrix}
+4 & -1 \\ 12 & -3
+\end{pmatrix}
+= \boldsymbol A.
+\end{align*}
+
+## Eigendecomposition
+
+### Eigenvalues
+
+An **eigenvalue** $\lambda$ of a $k \times k$ square matrix is a
+solution to the equation $$
+  \det(\lambda \boldsymbol I_k - \boldsymbol A) = 0.
+$$ The function
+$f(\lambda) = \det(\lambda \boldsymbol I_k - \boldsymbol A)$ has exactly
+$k$ roots so that $\det(\lambda \boldsymbol I_k - \boldsymbol A) = 0$
+has exactly $k$ solutions. The solutions $\lambda_1, \ldots, \lambda_k$
+are the $k$ eigenvalues of $\boldsymbol A$.
+
+Most applications of eigenvalues in econometrics concern symmetric
+matrices. In this case, all eigenvalues are real-valued. In the case of
+non-symmetric matrices, some eigenvalues may be complex-valued.
+
+Useful properties of the eigenvalues of a symmetric $k \times k$ matrix
+are:
+
+i)  $\det(\boldsymbol A) = \lambda_1 \cdot \ldots \cdot \lambda_k$
+ii) $\mathop{\mathrm{tr}}(\boldsymbol A) = \lambda_1 + \ldots + \lambda_k$
+iii) $\boldsymbol A$ is nonsingular if and only if all eigenvalues are
+     nonzero
+iv) $\boldsymbol A \boldsymbol B$ and $\boldsymbol B \boldsymbol A$ have
+    the same eigenvalues.
+
+### Eigenvectors
+
+If $\lambda_i$ is an eigenvalue of $\boldsymbol A$, then
+$\lambda_i \boldsymbol I_k - \boldsymbol A$ is singular, which implies
+that there exists a linear combination vector $\boldsymbol v_i$ with
+$(\lambda_i \boldsymbol I_k - \boldsymbol A) \boldsymbol v_i = \boldsymbol 0$.
+Equivalently, $$
+  \boldsymbol A \boldsymbol v_i = \lambda_i \boldsymbol v_i,
+$$ which can be solved by Gaussian elimination. It is convenient to
+normalize any solution such that $\boldsymbol v_i'\boldsymbol v_i = 1$.
+The solutions $\boldsymbol v_1, \ldots, \boldsymbol v_k$ are called
+eigenvectors of $\boldsymbol A$ to corresponding eigenvalues
+$\lambda_1, \ldots, \lambda_k$.
+
+### Spectral decomposition
+
+If $\boldsymbol A$ is symmetric, then
+$\boldsymbol v_1, \ldots, \boldsymbol v_k$ are pairwise orthogonal
+(i.e., $\boldsymbol v_i' \boldsymbol v_j$ for $i \neq j$). Let
+$\boldsymbol V = \begin{pmatrix} \boldsymbol v_1 & \ldots & \boldsymbol v_k \end{pmatrix}$
+be the $k \times k$ matrix of eigenvectors and let
+$\boldsymbol \Lambda = \mathop{\mathrm{diag}}(\lambda_1, \ldots, \lambda_k)$
+be the $k \times k$ diagonal matrix with the eigenvalues on the main
+diagonal. Then, we can write $$
+  \boldsymbol A = \boldsymbol V \boldsymbol \Lambda \boldsymbol V',
+$$ which is called the **spectral decomposition** of $\boldsymbol A$.
+The matrix of eigenvalues can be written as
+$\boldsymbol \Lambda = \boldsymbol V' \boldsymbol A \boldsymbol V$.
+
+### Eigendecomposition in `R`
+
+The function `eigen()` computes the eigenvalues and corresponding
+eigenvectors.
+
+```{r}
+B=t(A)%*%A 
+B #A'A is symmetric
+eigen(B) #eigenvalues and eigenvector matrix
+```
+
+## Definite matrix
+
+The $k \times k$ square matrix $\boldsymbol{A}$ is called **positive
+definite** if $$\boldsymbol{c}'\boldsymbol{Ac}>0$$ holds for all nonzero
+vectors $\boldsymbol{c}\in \mathbb{R}^k$. If
+$$\boldsymbol{c}'\boldsymbol{Ac}\geq 0$$ for all vectors
+$\boldsymbol{c}\in \mathbb{R}^k$, the matrix is called **positive
+semi-definite**. Analogously, $\boldsymbol A$ is called **negative
+definite** if $\boldsymbol{c}'\boldsymbol{Ac}<0$ and **negative
+semi-definite** if $\boldsymbol{c}'\boldsymbol{Ac}\leq 0$ for all
+nonzero vectors $\boldsymbol c \in \mathbb R^k$. A matrix that is
+neither positive semi-definite nor negative semi-definite is called
+**indefinite**
+
+The definiteness property of a symmetric matrix $\boldsymbol A$ can be
+determined using its eigenvalues:
+
+i)  $\boldsymbol A$ is positive definite  $\Leftrightarrow$  all
+    eigenvalues of $\boldsymbol A$ are strictly positive
+ii) $\boldsymbol A$ is negative definite  $\Leftrightarrow$   all
+    eigenvalues of $\boldsymbol A$ are strictly negative
+iii) $\boldsymbol A$ is positive semi-definite  $\Leftrightarrow$   all
+     eigenvalues of $\boldsymbol A$ are non-negative
+iv) $\boldsymbol A$ is negative semi-definite  $\Leftrightarrow$   all
+    eigenvalues of $\boldsymbol A$ are non-positive
+
+```{r}
+eigen(B)$values #B is positive definite (all eigenvalues positive)
+```
+
+The matrix analog of a positive or negative number (scalar) is a
+positive definite or negative definite matrix. Therefore, we use the
+notation
+
+i)  $\boldsymbol A > 0$  if $\boldsymbol A$ is positive definite
+ii) $\boldsymbol A < 0$  if $\boldsymbol A$ is negative definite
+iii) $\boldsymbol A \geq 0$  if $\boldsymbol A$ is positive
+     semi-definite
+iv) $\boldsymbol A \leq 0$  if $\boldsymbol A$ is negative semi-definite
+
+The notation $\boldsymbol A > \boldsymbol B$ means that the matrix
+$\boldsymbol A - \boldsymbol B$ is positive definite.
+
+## Cholesky decomposition
+
+Any positive definite and symmetric matrix $\boldsymbol B$ can be
+written as $$
+  \boldsymbol B = \boldsymbol P \boldsymbol P',
+$$ where $P$ is a lower triangular matrix with strictly positive
+diagonal entries $p_{jj} > 0$. This representation is called **Cholesky
+decomposition**. The matrix $\boldsymbol P$ is unique. For a
+$2 \times 2$ matrix $\boldsymbol B$ we have \begin{align*}
+\begin{pmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \end{pmatrix}
+&= \begin{pmatrix} p_{11} & 0 \\ p_{21} & p_{22} \end{pmatrix}
+\begin{pmatrix} p_{11} & p_{21} \\ 0 & p_{22} \end{pmatrix} \\
+&= \begin{pmatrix} p_{11}^2 & p_{11} p_{21} \\ p_{11} p_{21} & p_{21}^2 + p_{22}^2 \end{pmatrix},
+\end{align*} which implies $p_{11} = \sqrt{b_{11}}$,
+$p_{21} = b_{21}/p_{11}$, and $p_{22} = \sqrt{b_{22} - p_{21}^2}$. For a
+$3 \times 3$ matrix we obtain
+
+\begin{align*}
+\begin{pmatrix} b_{11} & b_{12} & b_{31} \\ b_{21} & b_{22} & b_{23} \\ b_{31} & b_{32} & b_{33} \end{pmatrix}
+= \begin{pmatrix} p_{11} & 0 & 0 \\ p_{21} & p_{22} & 0 \\ p_{31} & p_{32} & p_{33} \end{pmatrix}
+\begin{pmatrix} p_{11} & p_{21} & p_{31} \\ 0 & p_{22} & p_{32} \\ 0 & 0 & p_{33}\end{pmatrix} \\
+= \begin{pmatrix} p_{11}^2 & p_{11} p_{21} & p_{11} p_{31} \\ p_{11} p_{21} & p_{21}^2 + p_{22}^2 & p_{21} p_{31} + p_{22} p_{32} \\ p_{11}p_{31} & p_{21}p_{31} + p_{22}p_{32} & p_{31}^2 + p_{32}^2  + p_{33}^2\end{pmatrix},
+\end{align*} which implies
+
+```{=tex}
+\begin{gather*}
+p_{11}=\sqrt{b_{11}}, \ \ p_{21} = \frac{b_{21}}{p_{11}}, \ \ p_{31} = \frac{b_{31}}{p_{11}}, \ \ p_{22} = \sqrt{b_{22}-p_{21}^2}, \\
+p_{32}= \frac{b_{32}-p_{21}p_{31}}{p_{22}}, \ \ p_{33} = \sqrt{b_{33} - p_{31}^2 - p_{32}^2}.
+\end{gather*}
+```
+Let's compute the Cholesky decomposition of $$
+\boldsymbol B = \begin{pmatrix} 1 & -0.5 & 0.6 \\ -0.5 & 1 & 0.25 \\ 0.6 & 0.25 & 1 \end{pmatrix}
+$$ using the `R` function `chol()`:
+
+```{r}
+B = matrix(c(1, -0.5, 0.6, -0.5, 1, 0.25, 0.6, 0.25, 1), ncol=3)
+chol(B)
+```
+
+## Vectorization
+
+The **vectorization operator** $\mathop{\mathrm{vec}}()$ stacks the
+matrix entries column-wise into a large vector. The vectorized
+$k \times m$ matrix $\boldsymbol A$ is the $km \times 1$ vector $$
+\mathop{\mathrm{vec}}(\boldsymbol A) = (a_{11}, \ldots, a_{k1}, a_{12}, \ldots, a_{k2}, \ldots, a_{1m}, \ldots, a_{km})'.
+$$
+
+```{r}
+c(A) #vectorize the matrix A
+```
+
+## Kronecker product
+
+The **Kronecker product** $\otimes$ multiplies each element of the
+left-hand side matrix with the entire matrix on the right-hand side. For
+a $k \times m$ matrix $\boldsymbol A$ and a $r \times s$ matrix
+$\boldsymbol B$, we get the $kr\times ms$ matrix $$
+A \otimes B = \begin{pmatrix} a_{11}\boldsymbol B & \ldots & a_{1m}\boldsymbol B \\ \vdots & & \vdots \\ a_{k1}\boldsymbol B & \ldots & a_{km}\boldsymbol B \end{pmatrix},
+$$ where each entry $a_{ij} \boldsymbol B$ is a $r \times s$ matrix.
+
+```{r}
+A %x% B #Kronecker product in R
+```
+
+## Vector and matrix norm
+
+A norm $\|\cdot\|$ of a vector or a matrix is a measure of distance from
+the origin. The most commonly used norms are the Euclidean vector norm
+$$
+  \|\boldsymbol a\| = \sqrt{\boldsymbol a' \boldsymbol a} = \sqrt{\sum_{i=1}^k a_i^2}
+$$ for $\boldsymbol a \in \mathbb R^k$, and the Frobenius matrix norm $$
+  \|\boldsymbol A \| = \sqrt{\sum_{i=1}^k \sum_{j=1}^m a_{ij}^2}
+$$ for $\boldsymbol A \in \mathbb R^{k \times m}$.
+
+A norm satisfies the following properties:
+
+i)  $\|\lambda \boldsymbol A\| = |\lambda| \|\boldsymbol A\|$ for any
+    scalar $\lambda$ (absolute homogeneity)
+ii) $\|\boldsymbol A + \boldsymbol B\| \leq \|\boldsymbol A\| + \|\boldsymbol B\|$
+    (triangle inequality)
+iii) $\|\boldsymbol A\| = 0$ implies $\boldsymbol A = \boldsymbol 0$
+     (definiteness)

@@ -18,6 +18,11 @@ book:
   open-graph: true
   chapters:
     - index.qmd
+    - 02_multiplication.qmd
+    - 03_inverse.qmd
+    - 04_furtherconcepts.qmd
+    - 05_calculus.qmd
+    - 06_exercises.qmd
 
 format:
   html:
