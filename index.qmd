@@ -1,0 +1,126 @@
+# Basic definitions
+
+## Scalar, vector, and matrix
+
+A **scalar** $a$ is a single real number. We write $a \in \mathbb R$.
+
+A **vector** $\boldsymbol a$ of length $k$ is a $k \times 1$ list of
+real numbers $$
+\boldsymbol a = \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_k \end{pmatrix}.
+$$ By default, when we refer to a vector, we always mean a column
+vector. We write $\boldsymbol a \in \mathbb R^k$. The value $a_i$ is
+called $i$-th entry or $i$-th component of $\boldsymbol a$. A scalar is
+a vector of length 1. A row vector of length $k$ is written as
+$\boldsymbol b = (b_1, \ldots, b_k)$.
+
+A **matrix** $\boldsymbol A$ of order $k \times m$ is a rectangular
+array of real numbers $$\boldsymbol A =\begin{pmatrix}
+             a_{11} & a_{12} & \cdots & a_{1m}\\
+             a_{21} & a_{22} & \cdots & a_{2m}\\
+             \vdots & \vdots &       & \vdots\\
+             a_{k1} & a_{k2} & \cdots & a_{km}
+\end{pmatrix}$$ with $k$ rows and $m$ columns. We write
+$\boldsymbol A \in \mathbb R^{k \times m}$. The value $a_{ij}$ is called
+$(i,j)$-th entry or $(i,j)$-th component of $\boldsymbol A$. We also use
+the notation $(\boldsymbol A)_{i,j}$ to denote the $(i,j)$-th entry. A
+vector of length $k$ is a $k \times 1$ matrix. A row vector of length
+$k$ is a $1 \times k$ matrix. A scalar is a matrix of order
+$1 \times 1$.
+
+We may describe a matrix $\boldsymbol A$ by its column or row vectors as
+$$
+\boldsymbol A = \begin{pmatrix} \boldsymbol a_1 & \boldsymbol a_2 & \ldots & \boldsymbol a_m \end{pmatrix} 
+= \begin{pmatrix} \boldsymbol \alpha_1 \\ \vdots \\ \boldsymbol \alpha_k \end{pmatrix},
+$$ where $$
+\boldsymbol a_i = \begin{pmatrix} a_{1i} \\ \vdots \\ a_{ki} \end{pmatrix}
+$$ is the $i$-th column of $\boldsymbol A$ and
+$\boldsymbol \alpha_i = (a_{i1}, \ldots, a_{im})$ is the $i$-th row.
+
+## Some specific matrices
+
+A matrix is called **square matrix** if the numbers of rows and columns
+coincide (i.e., $k=m$).
+$$\boldsymbol{B} = \begin{pmatrix}1 & 2 \\ 3 & 4 \end{pmatrix}$$ is a
+square matrix. A square matrix is called **diagonal matrix** if all
+off-diagonal elements are zero.
+$$\boldsymbol{C} = \begin{pmatrix}1 & 0 \\ 0 & 4 \end{pmatrix}$$ is a
+diagonal matrix. We also write
+$\boldsymbol C = \mathop{\mathrm{diag}}(1,4)$. A square matrix is called
+**upper triangular** if all elements below the main diagonal are zero,
+and **lower triangular** if all elements above the main diagonal are
+zero. Examples of an upper triangular matrix $\boldsymbol D$ and a lower
+triangular matrix $\boldsymbol E$ are
+$$\boldsymbol{D} = \begin{pmatrix}1 & 2 \\ 0 & 4 \end{pmatrix},
+\quad
+\boldsymbol{E} = \begin{pmatrix}1 & 0 \\ 3 & 4 \end{pmatrix}.
+$$ The $k \times k$ diagonal matrix $$\boldsymbol{I}_k=
+      \begin{pmatrix}
+      1      & 0      & \cdots & 0\\
+      0      & 1      & \cdots & 0\\
+      \vdots & \vdots & \ddots & \vdots\\
+      0      & 0      & \cdots & 1
+      \end{pmatrix} = \mathop{\mathrm{diag}}(1, \ldots, 1)$$ is called
+**identity matrix** of order $k$. The $k \times m$ matrix
+$$\boldsymbol{0}_{k\times m}
+       =\begin{pmatrix}
+             0      & \cdots & 0\\
+            \vdots &  \ddots      & \vdots\\
+            0      & \cdots & 0
+       \end{pmatrix}
+      $$ is called **zero matrix**. The **zero vector** of length $k$ is
+$$\boldsymbol{0}_{k}
+       =\begin{pmatrix}
+             0   \\
+            \vdots \\
+            0 
+       \end{pmatrix}.
+      $$ If the order becomes clear from the context, we omit the
+indices and write $\boldsymbol I$ for the identity matrix and
+$\boldsymbol 0$ for the zero matrix or zero vector.
+
+## Transposition
+
+The **transpose** $\boldsymbol A'$ of the matrix $\boldsymbol A$ is
+obtained by flipping rows and columns on the main diagonal:
+$$\boldsymbol{A}'=\begin{pmatrix}
+    a_{11} & a_{21} & \cdots & a_{k1}\\
+    a_{12} & a_{22} & \cdots & a_{k2}\\
+    \vdots & \vdots &       & \vdots\\
+    a_{1m} & a_{2m} & \cdots & a_{km}
+\end{pmatrix}.$$ If $\boldsymbol A$ is a matrix of order $k\times m$,
+then $\boldsymbol A'$ is a matrix of order $m \times k$. *Example:*
+$$\boldsymbol{A}=\begin{pmatrix}
+        1 & 2\\
+        4 & 5\\
+        7 & 8
+\end{pmatrix}\quad\Rightarrow\quad
+\boldsymbol{A}'=\begin{pmatrix}
+        1 & 4 & 7\\
+        2 & 5 & 8
+\end{pmatrix}$$ The definition implies that transposing twice produces
+the original matrix: $$
+(\boldsymbol A')' = \boldsymbol A.
+$$ The transpose of a (column) vector is a row vector: $$
+\boldsymbol a' = (a_1, \ldots, a_k)
+$$
+
+A **symmetric matrix** is a square matrix $\boldsymbol A$ with
+$\boldsymbol{A}'=\boldsymbol{A}$. An example of a symmetric matrix is
+$$\boldsymbol A = \begin{aligned}         \left(\begin{matrix}1 & 2 \\ 2 & 4 \end{matrix}\right)\end{aligned}.$$
+
+## Matrices in `R`
+
+Let's define some matrices in `R`:
+
+```{r}
+A = matrix(c(1,4,7,2,5,8), nrow = 3, ncol = 2)
+A
+t(A) #transpose of A
+A[3,2] #the (3,2)-entry of A
+B = matrix(c(1,2,2,4), nrow = 2, ncol = 2) # another matrix
+all(B == t(B)) #check whether B is symmetric
+diag(c(1,4)) #diagonal matrix
+diag(1, nrow = 3) #identity matrix
+matrix(0, nrow=2, ncol=5) #matrix of zeros
+dim(A) #number of rows and columns
+```

@@ -1,0 +1,36 @@
+project:
+  type: book
+  output-dir: docs
+  
+book:
+  title: A crash course on matrix algebra in R
+  # repo-url: https://github.com/ottosven/rintro
+  # repo-actions: [edit, issue]
+  # downloads: [pdf]
+  author: Sven Otto
+  sidebar: false
+  navbar: false
+  date: today
+  date-format: "MMMM D, YYYY"
+  # description: "with applications in R"
+  search: true
+  page-navigation: true
+  open-graph: true
+  chapters:
+    - index.qmd
+
+format:
+  html:
+    theme:
+      light: [default, theme.scss]
+      dark: [default, darkly, theme.scss]
+    monofont: Fira Mono
+    number-sections: true
+    code-link: true
+    reference-links: true
+    reference-location: margin
+    knitr:
+      opts_chunk:
+        fig.align: center
+    fig-align: center
+  
