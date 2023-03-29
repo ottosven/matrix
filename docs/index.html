@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.56">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Sven Otto">
-<meta name="dcterms.date" content="2023-03-27">
-
+<meta name="dcterms.date" content="2023-03-29">
 <title>Crash Course on Matrix Algebra in R</title>
 <style>
 code{white-space: pre-wrap;}
@@ -23,7 +20,6 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -43,8 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -63,31 +58,22 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-
-
 <meta property="og:title" content="Crash Course on Matrix Algebra in R">
 <meta property="og:description" content="Due to the multivariate character of many econometric topics, matrix algebra is a commonly used tool in modern econometrics.">
 <meta property="og:site-name" content="Crash Course on Matrix Algebra in R">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">Crash Course on Matrix Algebra in R</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Crash Course on Matrix Algebra in R</a> 
         <div class="sidebar-tools-main">
@@ -102,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">Welcome</a>
   </div>
@@ -138,23 +124,21 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+<li>
+<a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a>
+  <ul class="collapse">
+<li><a href="#accompanying-r-scripts" id="toc-accompanying-r-scripts" class="nav-link" data-scroll-target="#accompanying-r-scripts">Accompanying R scripts</a></li>
   </ul>
-</nav>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">Crash Course on Matrix Algebra in R</h1>
 </div>
 
@@ -172,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 27, 2023</p>
+      <p class="date">March 29, 2023</p>
     </div>
   </div>
   
@@ -180,18 +164,23 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
-
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome</h1>
+</header><section id="welcome" class="level1 unnumbered"><h1 class="unnumbered">Welcome</h1>
 <p>Due to the multivariate character of many econometric topics, matrix algebra is a commonly used tool in modern econometrics. It provides a powerful and efficient framework for representing and manipulating systems of linear equations. This short lecture note series provides a brief introduction to the most relevant matrix algebra concepts for econometricians and their implementation in R.</p>
 <p>To learn R or refresh your skills, please check out my tutorial <a href="https://rintro.svenotto.com"><strong>Getting Started With R</strong></a>.</p>
+<section id="accompanying-r-scripts" class="level2"><h2 class="anchored" data-anchor-id="accompanying-r-scripts">Accompanying R scripts</h2>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p>All R codes of the different sections can be found here:</p>
+<ul>
+<li><a href="https://matrix.svenotto.com/matrix-sec1.R">matrix-sec1.R</a></li>
+<li><a href="https://matrix.svenotto.com/matrix-sec2.R">matrix-sec2.R</a></li>
+<li><a href="https://matrix.svenotto.com/matrix-sec3.R">matrix-sec3.R</a></li>
+<li><a href="https://matrix.svenotto.com/matrix-sec4.R">matrix-sec4.R</a></li>
+</ul>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -438,9 +427,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
       <a href="./01_basics.html" class="pagination-link">

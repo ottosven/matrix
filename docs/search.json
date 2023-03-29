@@ -7,6 +7,13 @@
     "text": "Welcome\nDue to the multivariate character of many econometric topics, matrix algebra is a commonly used tool in modern econometrics. It provides a powerful and efficient framework for representing and manipulating systems of linear equations. This short lecture note series provides a brief introduction to the most relevant matrix algebra concepts for econometricians and their implementation in R.\nTo learn R or refresh your skills, please check out my tutorial Getting Started With R."
   },
   {
+    "objectID": "index.html#accompanying-r-scripts",
+    "href": "index.html#accompanying-r-scripts",
+    "title": "Crash Course on Matrix Algebra in R",
+    "section": "Accompanying R scripts",
+    "text": "Accompanying R scripts\n\n\n\nAll R codes of the different sections can be found here:\n\nmatrix-sec1.R\nmatrix-sec2.R\nmatrix-sec3.R\nmatrix-sec4.R"
+  },
+  {
     "objectID": "01_basics.html#scalar-vector-and-matrix",
     "href": "01_basics.html#scalar-vector-and-matrix",
     "title": "\n1  Basic definitions\n",
