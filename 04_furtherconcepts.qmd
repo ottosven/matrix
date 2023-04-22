@@ -1,3 +1,9 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
 # Further matrix concepts
 
 ## Trace
@@ -90,7 +96,9 @@ that there exists a linear combination vector $\boldsymbol v_i$ with
 $(\lambda_i \boldsymbol I_k - \boldsymbol A) \boldsymbol v_i = \boldsymbol 0$.
 Equivalently, $$
   \boldsymbol A \boldsymbol v_i = \lambda_i \boldsymbol v_i,
-$$ which can be solved by Gaussian elimination. It is convenient to
+$$
+
+which can be solved by Gaussian elimination. It is convenient to
 normalize any solution such that $\boldsymbol v_i'\boldsymbol v_i = 1$.
 The solutions $\boldsymbol v_1, \ldots, \boldsymbol v_k$ are called
 eigenvectors of $\boldsymbol A$ to corresponding eigenvalues
@@ -100,15 +108,17 @@ $\lambda_1, \ldots, \lambda_k$.
 
 If $\boldsymbol A$ is symmetric, then
 $\boldsymbol v_1, \ldots, \boldsymbol v_k$ are pairwise orthogonal
-(i.e., $\boldsymbol v_i' \boldsymbol v_j$ for $i \neq j$). Let
+(i.e., $\boldsymbol v_i' \boldsymbol v_j = 0$ for $i \neq j$). Let
 $\boldsymbol V = \begin{pmatrix} \boldsymbol v_1 & \ldots & \boldsymbol v_k \end{pmatrix}$
 be the $k \times k$ matrix of eigenvectors and let
 $\boldsymbol \Lambda = \mathop{\mathrm{diag}}(\lambda_1, \ldots, \lambda_k)$
 be the $k \times k$ diagonal matrix with the eigenvalues on the main
 diagonal. Then, we can write $$
   \boldsymbol A = \boldsymbol V \boldsymbol \Lambda \boldsymbol V',
-$$ which is called the **spectral decomposition** of $\boldsymbol A$.
-The matrix of eigenvalues can be written as
+$$
+
+which is called the **spectral decomposition** of $\boldsymbol A$. The
+matrix of eigenvalues can be written as
 $\boldsymbol \Lambda = \boldsymbol V' \boldsymbol A \boldsymbol V$.
 
 ### Eigendecomposition in `R`
@@ -127,12 +137,13 @@ eigen(B) #eigenvalues and eigenvector matrix
 The $k \times k$ square matrix $\boldsymbol{A}$ is called **positive
 definite** if $$\boldsymbol{c}'\boldsymbol{Ac}>0$$ holds for all nonzero
 vectors $\boldsymbol{c}\in \mathbb{R}^k$. If
-$$\boldsymbol{c}'\boldsymbol{Ac}\geq 0$$ for all vectors
-$\boldsymbol{c}\in \mathbb{R}^k$, the matrix is called **positive
-semi-definite**. Analogously, $\boldsymbol A$ is called **negative
-definite** if $\boldsymbol{c}'\boldsymbol{Ac}<0$ and **negative
-semi-definite** if $\boldsymbol{c}'\boldsymbol{Ac}\leq 0$ for all
-nonzero vectors $\boldsymbol c \in \mathbb R^k$. A matrix that is
+$$\boldsymbol{c}'\boldsymbol{Ac}\geq 0$$
+
+for all vectors $\boldsymbol{c}\in \mathbb{R}^k$, the matrix is called
+**positive semi-definite**. Analogously, $\boldsymbol A$ is called
+**negative definite** if $\boldsymbol{c}'\boldsymbol{Ac}<0$ and
+**negative semi-definite** if $\boldsymbol{c}'\boldsymbol{Ac}\leq 0$ for
+all nonzero vectors $\boldsymbol c \in \mathbb R^k$. A matrix that is
 neither positive semi-definite nor negative semi-definite is called
 **indefinite**
 
