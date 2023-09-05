@@ -4,15 +4,14 @@ project:
   
 book:
   title: Crash Course on Matrix Algebra in R
-  # repo-url: https://github.com/ottosven/rintro
-  # repo-actions: [edit, issue]
-  # downloads: [pdf]
+  repo-url: https://github.com/ottosven/matrix
+  repo-actions: [edit, issue]
+  downloads: [pdf]
   author: Sven Otto
   sidebar: false
   navbar: false
   date: today
   date-format: "MMMM D, YYYY"
-  # description: "with applications in R"
   search: true
   page-navigation: true
   open-graph: true

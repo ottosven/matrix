@@ -65,7 +65,7 @@ Let $\boldsymbol y \in \mathbb R^n$, $\boldsymbol X$ be a $n \times k$
 matrix, and $\boldsymbol \beta \in \mathbb R^k$. Compute the derivatives
 $$
   \frac{\partial f(\boldsymbol \beta)}{\partial \boldsymbol \beta}, \quad 
-  \frac{\partial^2 f(\boldsymbol \beta)}{\partial \boldsymbol \beta \boldsymbol \beta'},
+  \frac{\partial^2 f(\boldsymbol \beta)}{\partial \boldsymbol \beta \partial \boldsymbol \beta'},
 $$ for the function
 $f(\boldsymbol \beta) = (\boldsymbol y - \boldsymbol X \boldsymbol \beta)'(\boldsymbol y - \boldsymbol X \boldsymbol \beta)$.
 
