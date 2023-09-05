@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">3.4</span> Determinant</h2>
 <p>Consider a square <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(\boldsymbol A\)</span>. The determinant <span class="math inline">\(\det(\boldsymbol A)\)</span> is a measure of the volume of the geometric object formed by the columns of <span class="math inline">\(\boldsymbol A\)</span> (a parallelogram for <span class="math inline">\(k=2\)</span>, a parallelepiped for <span class="math inline">\(k=3\)</span>, a hyper-parallelepiped for <span class="math inline">\(k&gt;3\)</span>). For <span class="math inline">\(2 \times 2\)</span> matrices, the determinant is easy to calculate: <span class="math display">\[
 \boldsymbol A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}, \quad
-\det(\boldsymbol A) = ad-bc.
+\det(\boldsymbol A) = ad - bc.
 \]</span></p>
 <p>If <span class="math inline">\(\boldsymbol A\)</span> is triangular (upper or lower), the determinant is the product of the diagonal entries, i.e., <span class="math inline">\(\det(\boldsymbol A) = \prod_{i=1}^k a_{ii}\)</span>. Hence, Gaussian elimination can be used to compute the determinant by transforming the matrix to a triangular one. The exact definition of the determinant is technical and of little importance to us. A useful relation is the following: <span class="math display">\[\begin{align*}
   \det(\boldsymbol A) = 0 \quad &amp;\Leftrightarrow \quad \boldsymbol A \ \text{is singular} \\

@@ -92,7 +92,7 @@ formed by the columns of $\boldsymbol A$ (a parallelogram for $k=2$, a
 parallelepiped for $k=3$, a hyper-parallelepiped for $k>3$). For
 $2 \times 2$ matrices, the determinant is easy to calculate: $$
 \boldsymbol A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}, \quad
-\det(\boldsymbol A) = ad-bc.
+\det(\boldsymbol A) = ad - bc.
 $$
 
 If $\boldsymbol A$ is triangular (upper or lower), the determinant is
