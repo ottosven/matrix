@@ -25,6 +25,10 @@ book:
     - 06_exercises.qmd
 
 format:
+  pdf:
+    include-in-header: preamble-latex.tex
+    documentclass: scrreprt
+    fig-align: center
   html:
     theme:
       light: [default, theme.scss]
