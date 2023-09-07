@@ -2,21 +2,21 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Crash Course on Matrix Algebra",
+    "title": "Crash Course in Matrix Algebra",
     "section": "",
     "text": "Welcome\nDue to the multivariate character of many econometric topics, matrix algebra is a commonly used tool in modern econometrics. It provides a powerful and efficient framework for representing and manipulating systems of linear equations. This short lecture note series provides a brief introduction to the most relevant matrix algebra concepts for econometricians and their implementation in R.\nTo learn R or refresh your skills, please check out my tutorial Getting Started With R."
   },
   {
     "objectID": "index.html#accompanying-r-scripts",
     "href": "index.html#accompanying-r-scripts",
-    "title": "Crash Course on Matrix Algebra",
+    "title": "Crash Course in Matrix Algebra",
     "section": "Accompanying R scripts",
     "text": "Accompanying R scripts\nAll R codes of the different sections can be found here:\n\nmatrix-sec1.R\nmatrix-sec2.R\nmatrix-sec3.R\nmatrix-sec4.R"
   },
   {
     "objectID": "index.html#comments",
     "href": "index.html#comments",
-    "title": "Crash Course on Matrix Algebra",
+    "title": "Crash Course in Matrix Algebra",
     "section": "Comments",
     "text": "Comments\nComments are welcome. Please let me know if you find any typing errors, too. Please report it on GitHub or contact me via e-mail: sven.otto@uni-koeln.de"
   },
