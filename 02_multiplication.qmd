@@ -1,5 +1,5 @@
 
-# Summation and multiplication
+# Sums and Products
 
 ## Matrix summation
 

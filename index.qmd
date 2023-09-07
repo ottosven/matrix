@@ -24,3 +24,9 @@ All R codes of the different sections can be found here:
 - [matrix-sec2.R](https://matrix.svenotto.com/matrix-sec2.R)
 - [matrix-sec3.R](https://matrix.svenotto.com/matrix-sec3.R)
 - [matrix-sec4.R](https://matrix.svenotto.com/matrix-sec4.R)
+
+
+## Comments
+
+Comments are welcome. Please let me know if you find any typing errors, too.
+Please [report it on GitHub](https://github.com/ottosven/matrix/issues/new) or contact me via e-mail: sven.otto@uni-koeln.de

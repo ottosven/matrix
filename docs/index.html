@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Sven Otto">
 <meta name="dcterms.date" content="2023-09-07">
-<title>Crash Course on Matrix Algebra in R</title>
+<meta name="description" content="A Refresher on Matrix Algebra for Econometricians with Implementation in R">
+<title>Crash Course on Matrix Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,9 +60,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<meta property="og:title" content="Crash Course on Matrix Algebra in R">
-<meta property="og:description" content="">
-<meta property="og:site-name" content="Crash Course on Matrix Algebra in R">
+<meta property="og:title" content="Crash Course on Matrix Algebra">
+<meta property="og:description" content="A Refresher on Matrix Algebra for Econometricians with Implementation in R">
+<meta property="og:site-name" content="Crash Course on Matrix Algebra">
 </head>
 <body class="nav-sidebar floating">
 
@@ -81,10 +82,10 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Crash Course on Matrix Algebra in R</a> 
+      <a href="./">Crash Course on Matrix Algebra</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/ottosven/matrix" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Crash-Course-on-Matrix-Algebra-in-R.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Crash-Course-on-Matrix-Algebra.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -111,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_multiplication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summation and multiplication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sums and Products</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -123,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_furtherconcepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Further matrix concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Advanced concepts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -150,15 +151,21 @@ ul.task-list li input[type="checkbox"] {
 <a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a>
   <ul class="collapse">
 <li><a href="#accompanying-r-scripts" id="toc-accompanying-r-scripts" class="nav-link" data-scroll-target="#accompanying-r-scripts">Accompanying R scripts</a></li>
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">Comments</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ottosven/matrix/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ottosven/matrix/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">Crash Course on Matrix Algebra in R</h1>
+<h1 class="title">Crash Course on Matrix Algebra</h1>
 </div>
 
+<div>
+  <div class="description">
+    A Refresher on Matrix Algebra for Econometricians with Implementation in R
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -191,7 +198,8 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://matrix.svenotto.com/matrix-sec2.R">matrix-sec2.R</a></li>
 <li><a href="https://matrix.svenotto.com/matrix-sec3.R">matrix-sec3.R</a></li>
 <li><a href="https://matrix.svenotto.com/matrix-sec4.R">matrix-sec4.R</a></li>
-</ul>
+</ul></section><section id="comments" class="level2"><h2 class="anchored" data-anchor-id="comments">Comments</h2>
+<p>Comments are welcome. Please let me know if you find any typing errors, too. Please <a href="https://github.com/ottosven/matrix/issues/new">report it on GitHub</a> or contact me via e-mail: sven.otto@uni-koeln.de</p>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

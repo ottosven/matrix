@@ -3,7 +3,8 @@ project:
   output-dir: docs
   
 book:
-  title: Crash Course on Matrix Algebra in R
+  title: Crash Course on Matrix Algebra
+  description: "A Refresher on Matrix Algebra for Econometricians with Implementation in R"
   repo-url: https://github.com/ottosven/matrix
   repo-actions: [edit, issue]
   downloads: [pdf]
