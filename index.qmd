@@ -28,5 +28,4 @@ All R codes of the different sections can be found here:
 
 ## Comments
 
-Comments are welcome. Please let me know if you find any typing errors, too.
-Please [report it on GitHub](https://github.com/ottosven/matrix/issues/new) or contact me via e-mail: sven.otto@uni-koeln.de
+Feedback is welcome. If you notice any typos or issues, please report them on [GitHub](https://github.com/ottosven/matrix/issues/new) or email me at sven.otto@uni-koeln.de.
