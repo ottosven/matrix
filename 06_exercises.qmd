@@ -71,4 +71,4 @@ $f(\boldsymbol \beta) = (\boldsymbol y - \boldsymbol X \boldsymbol \beta)'(\bold
 
 ## Solutions
 
-Solutions to the problems will be added soon.
+Solutions to the problems are available [here](https://matrix.svenotto.com/matrixexercises.pdf) (unfortunately only in German so far)
