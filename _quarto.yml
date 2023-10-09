@@ -32,8 +32,8 @@ format:
     fig-align: center
   html:
     theme:
-      light: [default, theme.scss]
-      dark: [default, darkly, theme.scss]
+      light: [cosmo, theme.scss]
+      dark: [cosmo, darkly, theme.scss]
     monofont: Fira Mono
     number-sections: true
     code-link: true

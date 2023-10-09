@@ -35,7 +35,7 @@ $\boldsymbol B \in \mathbb R^{m \times k}$ we have $$
 \mathop{\mathrm{tr}}(\boldsymbol A \boldsymbol B) = \mathop{\mathrm{tr}}(\boldsymbol B \boldsymbol A).
 $$
 
-## Idempotent matrx
+## Idempotent matrix
 
 The square matrix $\boldsymbol A$ is called **idempotent** if
 $\boldsymbol A \boldsymbol A = \boldsymbol A$. The identity matrix is
