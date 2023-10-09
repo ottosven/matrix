@@ -32,9 +32,10 @@ format:
     fig-align: center
   html:
     theme:
-      light: [cosmo, theme.scss]
-      dark: [cosmo, darkly, theme.scss]
+      light: [flatly, theme.scss]
+      dark: [flatly, darkly, theme.scss]
     monofont: Fira Mono
+    mathfont: Leto
     number-sections: true
     code-link: true
     reference-links: true

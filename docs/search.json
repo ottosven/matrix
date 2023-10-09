@@ -180,11 +180,11 @@
     ]
   },
   {
-    "objectID": "04_furtherconcepts.html#idempotent-matrx",
-    "href": "04_furtherconcepts.html#idempotent-matrx",
+    "objectID": "04_furtherconcepts.html#idempotent-matrix",
+    "href": "04_furtherconcepts.html#idempotent-matrix",
     "title": "\n4  Advanced concepts\n",
-    "section": "\n4.2 Idempotent matrx",
-    "text": "4.2 Idempotent matrx\nThe square matrix \\(\\boldsymbol A\\) is called idempotent if \\(\\boldsymbol A \\boldsymbol A = \\boldsymbol A\\). The identity matrix is idempotent: \\(\\boldsymbol I_n \\boldsymbol I_n = \\boldsymbol I_n\\). Another example is the matrix \\[\n\\boldsymbol A = \\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix}.\n\\] We have \\[\\begin{align*}\n\\boldsymbol A \\boldsymbol A\n&= \\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix}\n\\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix} \\\\\n&= \\begin{pmatrix}\n16-12 & -4+3 \\\\ 48-36 & -12+9\n\\end{pmatrix} \\\\\n&= \\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix}\n= \\boldsymbol A.\n\\end{align*}\\]",
+    "section": "\n4.2 Idempotent matrix",
+    "text": "4.2 Idempotent matrix\nThe square matrix \\(\\boldsymbol A\\) is called idempotent if \\(\\boldsymbol A \\boldsymbol A = \\boldsymbol A\\). The identity matrix is idempotent: \\(\\boldsymbol I_n \\boldsymbol I_n = \\boldsymbol I_n\\). Another example is the matrix \\[\n\\boldsymbol A = \\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix}.\n\\] We have \\[\\begin{align*}\n\\boldsymbol A \\boldsymbol A\n&= \\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix}\n\\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix} \\\\\n&= \\begin{pmatrix}\n16-12 & -4+3 \\\\ 48-36 & -12+9\n\\end{pmatrix} \\\\\n&= \\begin{pmatrix}\n4 & -1 \\\\ 12 & -3\n\\end{pmatrix}\n= \\boldsymbol A.\n\\end{align*}\\]",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Advanced concepts</span>"
     ]
