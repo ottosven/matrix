@@ -70,8 +70,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <meta property="og:title" content="Crash Course in Matrix Algebra - 6&nbsp; Problems">
 <meta property="og:description" content="A Refresher on Matrix Algebra for Econometricians with Implementation in R">
@@ -202,13 +216,13 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="problem-1" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-1">Problem 1</h3>
-<p>Consider the matrix <span class="math display">\[
+<p>Consider the matrix <span class="math display">
 \boldsymbol A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}.
-\]</span></p>
+</span></p>
 <ol type="a">
-<li>Determine <span class="math inline">\(\boldsymbol A'\)</span>. Is <span class="math inline">\(\boldsymbol A\)</span> symmetric?</li>
-<li>Is <span class="math inline">\(\boldsymbol A\)</span> idempotent?</li>
-<li>Compute the determinant and the rank. Is <span class="math inline">\(\boldsymbol A\)</span> nonsingular?</li>
+<li>Determine <span class="math inline">\boldsymbol A'</span>. Is <span class="math inline">\boldsymbol A</span> symmetric?</li>
+<li>Is <span class="math inline">\boldsymbol A</span> idempotent?</li>
+<li>Compute the determinant and the rank. Is <span class="math inline">\boldsymbol A</span> nonsingular?</li>
 <li>Compute the inverse.</li>
 <li>Compute the trace.</li>
 </ol>
@@ -216,42 +230,42 @@ ul.task-list li input[type="checkbox"] {
 <section id="problem-2" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-2">Problem 2</h3>
 <ol type="a">
-<li>Let <span class="math inline">\(\boldsymbol A \boldsymbol B = \boldsymbol C\)</span>, where <span class="math display">\[
+<li>Let <span class="math inline">\boldsymbol A \boldsymbol B = \boldsymbol C</span>, where <span class="math display">
 \boldsymbol A = \begin{pmatrix} 1 &amp; 0 \\ 2 &amp; 2 \end{pmatrix}, \quad
 \boldsymbol C = \begin{pmatrix} 1 &amp; 3 \\ 2 &amp; 5 \end{pmatrix}.
-\]</span> Compute <span class="math inline">\(\boldsymbol B\)</span>.</li>
-<li><span class="math inline">\(\boldsymbol \delta\)</span> and <span class="math inline">\(\boldsymbol \gamma\)</span> are <span class="math inline">\(c \times 1\)</span> vectors, <span class="math inline">\(\boldsymbol X\)</span> is a <span class="math inline">\(d \times c\)</span> matrix, and <span class="math inline">\(\boldsymbol Y\)</span> is a <span class="math inline">\(c \times d\)</span> matrix. Determine the orders of <span class="math inline">\(\boldsymbol X \boldsymbol Y\)</span>, <span class="math inline">\(\boldsymbol Y \boldsymbol X\)</span>, <span class="math inline">\(\boldsymbol \gamma' \boldsymbol \gamma\)</span>, <span class="math inline">\(\boldsymbol \gamma \boldsymbol \gamma'\)</span>, and <span class="math inline">\(\boldsymbol \delta' \boldsymbol Y \boldsymbol X \boldsymbol \gamma\)</span>. Under which conditions do the expressions <span class="math inline">\(\boldsymbol Y^{-1}\)</span> and <span class="math inline">\(\boldsymbol \delta' \boldsymbol Y \boldsymbol X + \boldsymbol \gamma' \boldsymbol \gamma\)</span> exist?</li>
-<li>Compute <span class="math inline">\(\mathop{\mathrm{tr}}(\lambda \boldsymbol R' \boldsymbol R)\)</span> for <span class="math inline">\(\lambda \in \mathbb R\)</span> and <span class="math display">\[
+</span> Compute <span class="math inline">\boldsymbol B</span>.</li>
+<li><span class="math inline">\boldsymbol \delta</span> and <span class="math inline">\boldsymbol \gamma</span> are <span class="math inline">c \times 1</span> vectors, <span class="math inline">\boldsymbol X</span> is a <span class="math inline">d \times c</span> matrix, and <span class="math inline">\boldsymbol Y</span> is a <span class="math inline">c \times d</span> matrix. Determine the orders of <span class="math inline">\boldsymbol X \boldsymbol Y</span>, <span class="math inline">\boldsymbol Y \boldsymbol X</span>, <span class="math inline">\boldsymbol \gamma' \boldsymbol \gamma</span>, <span class="math inline">\boldsymbol \gamma \boldsymbol \gamma'</span>, and <span class="math inline">\boldsymbol \delta' \boldsymbol Y \boldsymbol X \boldsymbol \gamma</span>. Under which conditions do the expressions <span class="math inline">\boldsymbol Y^{-1}</span> and <span class="math inline">\boldsymbol \delta' \boldsymbol Y \boldsymbol X + \boldsymbol \gamma' \boldsymbol \gamma</span> exist?</li>
+<li>Compute <span class="math inline">\mathop{\mathrm{tr}}(\lambda \boldsymbol R' \boldsymbol R)</span> for <span class="math inline">\lambda \in \mathbb R</span> and <span class="math display">
 \boldsymbol R = \begin{pmatrix} \frac{1}{4} &amp; \frac{\sqrt 3}{4} \\ \frac{\sqrt 3}{4} &amp; \frac{3}{4} \end{pmatrix}.
-\]</span></li>
+</span></li>
 </ol>
 </section>
 <section id="problem-3" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-3">Problem 3</h3>
-<p>Let <span class="math inline">\(\boldsymbol A\)</span> be nonsingular. Simplify the expression <span class="math display">\[
+<p>Let <span class="math inline">\boldsymbol A</span> be nonsingular. Simplify the expression <span class="math display">
   \bigg( \frac{1}{\sqrt 2} \boldsymbol A^{-1} \bigg( \frac{1}{\sqrt 2} \boldsymbol A'' + \frac{\sqrt 2}{2} \boldsymbol A \bigg) \bigg).
-\]</span></p>
+</span></p>
 </section>
 <section id="problem-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-4">Problem 4</h3>
-<p>Consider the <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(\boldsymbol X\)</span> with <span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol X) = k\)</span>. Moreover, let <span class="math inline">\(\boldsymbol P = \boldsymbol X (\boldsymbol X' \boldsymbol X)^{-1} \boldsymbol X'\)</span>, and let <span class="math inline">\(\boldsymbol M = \boldsymbol I_n - \boldsymbol P\)</span></p>
+<p>Consider the <span class="math inline">n \times k</span> matrix <span class="math inline">\boldsymbol X</span> with <span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol X) = k</span>. Moreover, let <span class="math inline">\boldsymbol P = \boldsymbol X (\boldsymbol X' \boldsymbol X)^{-1} \boldsymbol X'</span>, and let <span class="math inline">\boldsymbol M = \boldsymbol I_n - \boldsymbol P</span></p>
 <ol type="a">
-<li>Determine the order of the following matrices: <span class="math inline">\(\boldsymbol I_n\)</span>, <span class="math inline">\(\boldsymbol X' \boldsymbol X\)</span>, <span class="math inline">\(\boldsymbol P\)</span>, <span class="math inline">\(\boldsymbol M\)</span></li>
+<li>Determine the order of the following matrices: <span class="math inline">\boldsymbol I_n</span>, <span class="math inline">\boldsymbol X' \boldsymbol X</span>, <span class="math inline">\boldsymbol P</span>, <span class="math inline">\boldsymbol M</span></li>
 <li>Which matrices from a) are symmetric?</li>
 <li>Which matrices from a) are idempotent?</li>
-<li>Compute the trace of <span class="math inline">\(\boldsymbol I_n\)</span> and <span class="math inline">\(\boldsymbol P\)</span>.</li>
+<li>Compute the trace of <span class="math inline">\boldsymbol I_n</span> and <span class="math inline">\boldsymbol P</span>.</li>
 </ol>
 </section>
 <section id="problem-5" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-5">Problem 5</h3>
-<p>Let <span class="math inline">\(\boldsymbol X\)</span> be a <span class="math inline">\(n \times k\)</span> matrix. Show that <span class="math inline">\(\boldsymbol X' \boldsymbol X\)</span> is positive semi-definite. Under which condition is <span class="math inline">\(\boldsymbol X' \boldsymbol X\)</span> positive definite?</p>
+<p>Let <span class="math inline">\boldsymbol X</span> be a <span class="math inline">n \times k</span> matrix. Show that <span class="math inline">\boldsymbol X' \boldsymbol X</span> is positive semi-definite. Under which condition is <span class="math inline">\boldsymbol X' \boldsymbol X</span> positive definite?</p>
 </section>
 <section id="problem-6" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-6">Problem 6</h3>
-<p>Let <span class="math inline">\(\boldsymbol y \in \mathbb R^n\)</span>, <span class="math inline">\(\boldsymbol X\)</span> be a <span class="math inline">\(n \times k\)</span> matrix, and <span class="math inline">\(\boldsymbol \beta \in \mathbb R^k\)</span>. Compute the derivatives <span class="math display">\[
+<p>Let <span class="math inline">\boldsymbol y \in \mathbb R^n</span>, <span class="math inline">\boldsymbol X</span> be a <span class="math inline">n \times k</span> matrix, and <span class="math inline">\boldsymbol \beta \in \mathbb R^k</span>. Compute the derivatives <span class="math display">
   \frac{\partial f(\boldsymbol \beta)}{\partial \boldsymbol \beta}, \quad
   \frac{\partial^2 f(\boldsymbol \beta)}{\partial \boldsymbol \beta \partial \boldsymbol \beta'},
-\]</span> for the function <span class="math inline">\(f(\boldsymbol \beta) = (\boldsymbol y - \boldsymbol X \boldsymbol \beta)'(\boldsymbol y - \boldsymbol X \boldsymbol \beta)\)</span>.</p>
+</span> for the function <span class="math inline">f(\boldsymbol \beta) = (\boldsymbol y - \boldsymbol X \boldsymbol \beta)'(\boldsymbol y - \boldsymbol X \boldsymbol \beta)</span>.</p>
 </section>
 <section id="solutions" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="solutions"><span class="header-section-number">6.1</span> Solutions</h2>

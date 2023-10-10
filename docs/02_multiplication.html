@@ -98,7 +98,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 <meta property="og:title" content="Crash Course in Matrix Algebra - 2&nbsp; Sums and Products">
 <meta property="og:description" content="A Refresher on Matrix Algebra for Econometricians with Implementation in R">
 <meta property="og:site_name" content="Crash Course in Matrix Algebra">
@@ -220,35 +233,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><section id="matrix-summation" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="matrix-summation">
 <span class="header-section-number">2.1</span> Matrix summation</h2>
-<p>Let <span class="math inline">\(\boldsymbol A\)</span> and <span class="math inline">\(\boldsymbol B\)</span> both be matrices of order <span class="math inline">\(k \times m\)</span>. Their sum is defined componentwise: <span class="math display">\[\boldsymbol{A} + \boldsymbol{B}
+<p>Let <span class="math inline">\boldsymbol A</span> and <span class="math inline">\boldsymbol B</span> both be matrices of order <span class="math inline">k \times m</span>. Their sum is defined componentwise: <span class="math display">\boldsymbol{A} + \boldsymbol{B}
 =\begin{pmatrix}
 a_{11}+ b_{11} &amp; a_{12}+ b_{12} &amp; \cdots &amp; a_{1m}+ b_{1m} \\
 a_{21}+ b_{21} &amp; a_{22}+ b_{22} &amp; \cdots &amp; a_{2m}+ b_{2m} \\
 \vdots        &amp; \vdots        &amp;       &amp; \vdots        \\
 a_{k1}+ b_{k1} &amp; a_{k2}+ b_{k2} &amp; \cdots &amp; a_{km}+ b_{km}
-\end{pmatrix}.\]</span> Only two matrices of the same order can be added. <em>Example:</em> <span class="math display">\[\boldsymbol{A}=\begin{pmatrix}2&amp;0\\1&amp;5\\3&amp;2\end{pmatrix}\,,\quad
+\end{pmatrix}.</span> Only two matrices of the same order can be added. <em>Example:</em> <span class="math display">\boldsymbol{A}=\begin{pmatrix}2&amp;0\\1&amp;5\\3&amp;2\end{pmatrix}\,,\quad
 \boldsymbol{B}=\begin{pmatrix}-1&amp;1\\7&amp;1\\-5&amp;2\end{pmatrix}\,,\quad
-\boldsymbol{A}+\boldsymbol{B}=\begin{pmatrix}1&amp;1\\8&amp;6\\-2&amp;4\end{pmatrix}\,.\]</span></p>
-<p>The matrix summation satisfies the following rules: <span class="math display">\[\begin{array}{@{}rr@{\ }c@{\ }l@{}r@{}}
+\boldsymbol{A}+\boldsymbol{B}=\begin{pmatrix}1&amp;1\\8&amp;6\\-2&amp;4\end{pmatrix}\,.</span></p>
+<p>The matrix summation satisfies the following rules: <span class="math display">\begin{array}{@{}rr@{\ }c@{\ }l@{}r@{}}
 \text{(i)}    &amp; \boldsymbol{A}+\boldsymbol{B}         &amp;=&amp; \boldsymbol{B}+\boldsymbol{A}\,               &amp;  \text{(commutativity)} \\
 \text{(ii)}   &amp; (\boldsymbol{A}+\boldsymbol{B})+\boldsymbol{C}  &amp;=&amp; \boldsymbol{A}+(\boldsymbol{B}+\boldsymbol{C})\,        &amp;  \text{(associativity)} \\
 \text{(iii)}    &amp; \boldsymbol A + \boldsymbol 0 &amp;=&amp; \boldsymbol A &amp;   {\text{(identity element)}}     \\
 \text{(iv)}   &amp; (\boldsymbol A + \boldsymbol B)' &amp;=&amp; \boldsymbol A' + \boldsymbol B'     &amp;
 {\text{(transposition)}}          
-\end{array}\]</span></p>
+\end{array}</span></p>
 </section><section id="scalar-matrix-multiplication" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="scalar-matrix-multiplication">
 <span class="header-section-number">2.2</span> Scalar-matrix multiplication</h2>
-<p>The product of a <span class="math inline">\(k \times m\)</span> matrix <span class="math inline">\(\boldsymbol{A}\)</span> with a scalar <span class="math inline">\(\lambda\in\mathbb{R}\)</span> is defined componentwise: <span class="math display">\[\lambda \boldsymbol{A} =
+<p>The product of a <span class="math inline">k \times m</span> matrix <span class="math inline">\boldsymbol{A}</span> with a scalar <span class="math inline">\lambda\in\mathbb{R}</span> is defined componentwise: <span class="math display">\lambda \boldsymbol{A} =
 \begin{pmatrix}
    \lambda a_{11}   &amp; \lambda a_{12} &amp; \cdots  &amp; \lambda a_{1n} \\
    \lambda a_{21}   &amp; \lambda a_{22} &amp; \cdots  &amp; \lambda a_{2n} \\
    \vdots           &amp; \vdots &amp;                &amp; \vdots         \\
    \lambda a_{m1}   &amp; \lambda a_{m2} &amp; \cdots  &amp; \lambda a_{mn}
-\end{pmatrix}.\]</span> <em>Example:</em> <span class="math display">\[\lambda=2, \quad \boldsymbol{A}=\begin{pmatrix}2&amp;0\\1&amp;5\\3&amp;2\end{pmatrix},\quad
-\lambda\boldsymbol{A}=\begin{pmatrix}4&amp;0\\2&amp;10\\6&amp;4\end{pmatrix}.\]</span> Scalar-matrix multiplication satisfies the distributivity law: <span class="math display">\[\begin{array}{@{}rr@{\ }c@{\ }l@{}r@{}}
+\end{pmatrix}.</span> <em>Example:</em> <span class="math display">\lambda=2, \quad \boldsymbol{A}=\begin{pmatrix}2&amp;0\\1&amp;5\\3&amp;2\end{pmatrix},\quad
+\lambda\boldsymbol{A}=\begin{pmatrix}4&amp;0\\2&amp;10\\6&amp;4\end{pmatrix}.</span> Scalar-matrix multiplication satisfies the distributivity law: <span class="math display">\begin{array}{@{}rr@{\ }c@{\ }l@{}r@{}}
 \text{(i)}    &amp; \lambda(\boldsymbol{A}+\boldsymbol{B})&amp;=&amp; \lambda\boldsymbol{A}+\lambda\boldsymbol{B}\, &amp;    \\
 \text{(ii)}   &amp; (\lambda+\mu)\boldsymbol{A} &amp;=&amp; \lambda\boldsymbol{A}+\mu\boldsymbol{A}\,     &amp;
-\end{array}\]</span></p>
+\end{array}</span></p>
 </section><section id="element-by-element-operations-in-r" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="element-by-element-operations-in-r">
 <span class="header-section-number">2.3</span> Element-by-element operations in R</h2>
 <p>Basic arithmetic operations work on an element-by-element basis in <code>R</code>:</p>
@@ -295,26 +308,26 @@ a_{k1}+ b_{k1} &amp; a_{k2}+ b_{k2} &amp; \cdots &amp; a_{km}+ b_{km}
 <span class="header-section-number">2.4</span> Vector-vector multiplication</h2>
 <section id="inner-product" class="level3" data-number="2.4.1"><h3 data-number="2.4.1" class="anchored" data-anchor-id="inner-product">
 <span class="header-section-number">2.4.1</span> Inner product</h3>
-<p>The <strong>inner product</strong> (also known as dot product) of two vectors <span class="math inline">\(\boldsymbol{a},\boldsymbol{b}\in\mathbb{R}^k\)</span> is <span class="math display">\[\boldsymbol{a}'\boldsymbol{b} = a_1 b_1+a_2b_2+\ldots+a_kb_k=\sum_{i=1}^k a_ib_i\in\mathbb{R}.\]</span> <em>Example:</em> <span class="math display">\[\boldsymbol{a}=\begin{pmatrix}1\\2\\3\end{pmatrix},\quad
+<p>The <strong>inner product</strong> (also known as dot product) of two vectors <span class="math inline">\boldsymbol{a},\boldsymbol{b}\in\mathbb{R}^k</span> is <span class="math display">\boldsymbol{a}'\boldsymbol{b} = a_1 b_1+a_2b_2+\ldots+a_kb_k=\sum_{i=1}^k a_ib_i\in\mathbb{R}.</span> <em>Example:</em> <span class="math display">\boldsymbol{a}=\begin{pmatrix}1\\2\\3\end{pmatrix},\quad
 \boldsymbol{b}=\begin{pmatrix}-2\\0\\2\end{pmatrix},\quad
-\boldsymbol{a}'\boldsymbol{b}=1\cdot(-2)+2\cdot0+3\cdot2=4.\]</span></p>
-<p>The inner product is commutative: <span class="math display">\[\begin{align*}
+\boldsymbol{a}'\boldsymbol{b}=1\cdot(-2)+2\cdot0+3\cdot2=4.</span></p>
+<p>The inner product is commutative: <span class="math display">\begin{align*}
   \boldsymbol a' \boldsymbol b = \boldsymbol b' \boldsymbol a.
-\end{align*}\]</span> Two vectors <span class="math inline">\(\boldsymbol a\)</span> and <span class="math inline">\(\boldsymbol b\)</span> are called <strong>orthogonal</strong> if <span class="math inline">\(\boldsymbol a' \boldsymbol b = 0\)</span>. The vectors <span class="math inline">\(\boldsymbol a\)</span> and <span class="math inline">\(\boldsymbol b\)</span> are called <strong>orthonormal</strong> if, in addition to <span class="math inline">\(\boldsymbol a'\boldsymbol b\)</span>, we have <span class="math inline">\(\boldsymbol a' \boldsymbol a = 1\)</span> and <span class="math inline">\(\boldsymbol b' \boldsymbol b=1\)</span>.</p>
+\end{align*}</span> Two vectors <span class="math inline">\boldsymbol a</span> and <span class="math inline">\boldsymbol b</span> are called <strong>orthogonal</strong> if <span class="math inline">\boldsymbol a' \boldsymbol b = 0</span>. The vectors <span class="math inline">\boldsymbol a</span> and <span class="math inline">\boldsymbol b</span> are called <strong>orthonormal</strong> if, in addition to <span class="math inline">\boldsymbol a'\boldsymbol b</span>, we have <span class="math inline">\boldsymbol a' \boldsymbol a = 1</span> and <span class="math inline">\boldsymbol b' \boldsymbol b=1</span>.</p>
 </section><section id="outer-product" class="level3" data-number="2.4.2"><h3 data-number="2.4.2" class="anchored" data-anchor-id="outer-product">
 <span class="header-section-number">2.4.2</span> Outer product</h3>
-<p>The outer product (also known as dyadic product) of two vectors <span class="math inline">\(\boldsymbol{x} \in \mathbb R^k\)</span> and <span class="math inline">\(\boldsymbol{y}\in\mathbb{R}^m\)</span> is <span class="math display">\[\boldsymbol{x}\boldsymbol{y}' =
+<p>The outer product (also known as dyadic product) of two vectors <span class="math inline">\boldsymbol{x} \in \mathbb R^k</span> and <span class="math inline">\boldsymbol{y}\in\mathbb{R}^m</span> is <span class="math display">\boldsymbol{x}\boldsymbol{y}' =
 \left(\begin{matrix}
 x_1 y_1 &amp; x_1 y_2  &amp;\ldots &amp; x_1 y_m \\
 x_2 y_1 &amp; x_2 y_2 &amp; \ldots &amp; x_2 y_m \\
 \vdots   &amp; \vdots &amp;      &amp; \vdots    \\
 x_k y_1 &amp; x_k y_2 &amp; \ldots &amp; x_k y_m
-\end{matrix}\right)\in  \mathbb{R}^{k \times m}.\]</span> <em>Example:</em> <span class="math display">\[\boldsymbol{x}=\begin{pmatrix}1\\2\end{pmatrix}\,,\quad
+\end{matrix}\right)\in  \mathbb{R}^{k \times m}.</span> <em>Example:</em> <span class="math display">\boldsymbol{x}=\begin{pmatrix}1\\2\end{pmatrix}\,,\quad
 \boldsymbol{y}=\begin{pmatrix}-2\\0\\2\end{pmatrix}\,,\quad
 \boldsymbol{x}\boldsymbol{y}'=\left(\begin{matrix}
 -2 &amp; 0 &amp; 2 \\
 -4 &amp; 0 &amp; 4
-\end{matrix}\right).\]</span></p>
+\end{matrix}\right).</span></p>
 </section><section id="vector-multiplication-in-r" class="level3" data-number="2.4.3"><h3 data-number="2.4.3" class="anchored" data-anchor-id="vector-multiplication-in-r">
 <span class="header-section-number">2.4.3</span> Vector multiplication in <code>R</code>
 </h3>
@@ -343,12 +356,12 @@ x_k y_1 &amp; x_k y_2 &amp; \ldots &amp; x_k y_m
 </div>
 </section></section><section id="matrix-matrix-multiplication" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="matrix-matrix-multiplication">
 <span class="header-section-number">2.5</span> Matrix-matrix multiplication</h2>
-<p>The <strong>matrix product</strong> of a <span class="math inline">\(k \times m\)</span> matrix <span class="math inline">\(\boldsymbol{A}\)</span> and a <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\boldsymbol{B}\)</span> is the <span class="math inline">\(k\times n\)</span> matrix <span class="math inline">\(\boldsymbol C = \boldsymbol{A}\boldsymbol{B}\)</span> with the components <span class="math display">\[c_{ij} = a_{i1}b_{1j}+a_{i2}b_{2j}+\ldots+a_{im}b_{mj}=\sum_{l=1}^m a_{il}b_{lj} = \boldsymbol a_i' \boldsymbol b_j,\]</span> where <span class="math inline">\(\boldsymbol a_i = (a_{i1}, \ldots, a_{im})'\)</span> is the <span class="math inline">\(i\)</span>-th row of <span class="math inline">\(\boldsymbol A\)</span> written as a column vector, and <span class="math inline">\(\boldsymbol b_j = (b_{1j}, \ldots, b_{mj})'\)</span> is the <span class="math inline">\(j\)</span>-th column of <span class="math inline">\(\boldsymbol B\)</span>. The full matrix product can be written as <span class="math display">\[
+<p>The <strong>matrix product</strong> of a <span class="math inline">k \times m</span> matrix <span class="math inline">\boldsymbol{A}</span> and a <span class="math inline">m \times n</span> matrix <span class="math inline">\boldsymbol{B}</span> is the <span class="math inline">k\times n</span> matrix <span class="math inline">\boldsymbol C = \boldsymbol{A}\boldsymbol{B}</span> with the components <span class="math display">c_{ij} = a_{i1}b_{1j}+a_{i2}b_{2j}+\ldots+a_{im}b_{mj}=\sum_{l=1}^m a_{il}b_{lj} = \boldsymbol a_i' \boldsymbol b_j,</span> where <span class="math inline">\boldsymbol a_i = (a_{i1}, \ldots, a_{im})'</span> is the <span class="math inline">i</span>-th row of <span class="math inline">\boldsymbol A</span> written as a column vector, and <span class="math inline">\boldsymbol b_j = (b_{1j}, \ldots, b_{mj})'</span> is the <span class="math inline">j</span>-th column of <span class="math inline">\boldsymbol B</span>. The full matrix product can be written as <span class="math display">
 \boldsymbol A \boldsymbol B = \begin{pmatrix} \boldsymbol a_1' \\ \vdots \\ \boldsymbol a_k' \end{pmatrix}
 \begin{pmatrix} \boldsymbol b_1 &amp; \ldots &amp; \boldsymbol b_n \end{pmatrix}
 = \begin{pmatrix} \boldsymbol a_1' \boldsymbol b_1 &amp; \ldots &amp; \boldsymbol a_1' \boldsymbol b_n \\ \vdots &amp; &amp; \vdots \\ \boldsymbol a_k' \boldsymbol b_1 &amp; \ldots &amp; \boldsymbol a_k' \boldsymbol b_n \end{pmatrix}.
-\]</span> The matrix product is only defined if the number of columns of the first matrix equals the number of rows of the second matrix. Therefore, we say that the <span class="math inline">\(k \times m\)</span> matrix <span class="math inline">\(\boldsymbol A\)</span> and the <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\boldsymbol B\)</span> are <strong>conformable for matrix multiplication</strong>.</p>
-<p><em>Example:</em> Let <span class="math display">\[\begin{aligned}
+</span> The matrix product is only defined if the number of columns of the first matrix equals the number of rows of the second matrix. Therefore, we say that the <span class="math inline">k \times m</span> matrix <span class="math inline">\boldsymbol A</span> and the <span class="math inline">m \times n</span> matrix <span class="math inline">\boldsymbol B</span> are <strong>conformable for matrix multiplication</strong>.</p>
+<p><em>Example:</em> Let <span class="math display">\begin{aligned}
     \boldsymbol{A}=\begin{pmatrix}
     1 &amp; 0\\
     0 &amp; 1\\
@@ -357,7 +370,7 @@ x_k y_1 &amp; x_k y_2 &amp; \ldots &amp; x_k y_m
 \boldsymbol{B}=\begin{pmatrix}
     -1 &amp; 2\\
     -3 &amp; 0
-\end{pmatrix}.\end{aligned}\]</span> Their matrix product is <span class="math display">\[\begin{aligned}
+\end{pmatrix}.\end{aligned}</span> Their matrix product is <span class="math display">\begin{aligned}
 \boldsymbol{A} \boldsymbol{B} &amp;= \begin{pmatrix}
     1 &amp; 0\\
     0 &amp; 1\\
@@ -366,7 +379,7 @@ x_k y_1 &amp; x_k y_2 &amp; \ldots &amp; x_k y_m
     -1 &amp; 2\\
     -3 &amp; 0
 \end{pmatrix} \\ &amp;= \left(\begin{matrix}1 \cdot (-1) + 0 \cdot (-3) &amp; 1 \cdot 2 + 0 \cdot 0 \\ 0 \cdot (-1) + 1 \cdot (-3) &amp; 0 \cdot 2 + 1 \cdot 0 \\ 2 \cdot (-1) + 1 \cdot (-3) &amp; 2 \cdot 2 + 1 \cdot 0 \end{matrix}\right)
-= \left(\begin{matrix}-1 &amp; 2 \\ -3 &amp; 0 \\ -5 &amp; 4 \end{matrix}\right).\end{aligned}\]</span></p>
+= \left(\begin{matrix}-1 &amp; 2 \\ -3 &amp; 0 \\ -5 &amp; 4 \end{matrix}\right).\end{aligned}</span></p>
 <p>The <code>%*%</code> operator is used in <code>R</code> for matrix-matrix multiplications:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
@@ -379,7 +392,7 @@ x_k y_1 &amp; x_k y_2 &amp; \ldots &amp; x_k y_m
 [3,]   -5    4</code></pre>
 </div>
 </div>
-<p>Matrix multiplication is <strong>not commutative</strong>. In general, we have <span class="math inline">\(\boldsymbol A \boldsymbol B \neq \boldsymbol B \boldsymbol A\)</span>. <em>Example:</em> <span class="math display">\[\begin{aligned}
+<p>Matrix multiplication is <strong>not commutative</strong>. In general, we have <span class="math inline">\boldsymbol A \boldsymbol B \neq \boldsymbol B \boldsymbol A</span>. <em>Example:</em> <span class="math display">\begin{aligned}
     \boldsymbol{A}\boldsymbol{B} = \begin{pmatrix} 1 &amp; 2\\ 3 &amp; 4\end{pmatrix}
     \begin{pmatrix} 1 &amp; 1\\ 1 &amp; 2\end{pmatrix}
     &amp;=
@@ -387,11 +400,11 @@ x_k y_1 &amp; x_k y_2 &amp; \ldots &amp; x_k y_m
     \boldsymbol{B}\boldsymbol{A} = \begin{pmatrix} 1 &amp; 1\\ 1 &amp; 2\end{pmatrix}
     \begin{pmatrix} 1 &amp; 2\\ 3 &amp; 4\end{pmatrix}
     &amp;=
-    \begin{pmatrix} 4 &amp; 6\\ 7 &amp; 10\end{pmatrix}\,.\end{aligned}\]</span> Even if neither of the two matrices contains zeros, the matrix product can give the zero matrix: <span class="math display">\[\boldsymbol{A}\boldsymbol{B} = \begin{pmatrix} 1 &amp; 2\\ 2 &amp; 4\end{pmatrix}
+    \begin{pmatrix} 4 &amp; 6\\ 7 &amp; 10\end{pmatrix}\,.\end{aligned}</span> Even if neither of the two matrices contains zeros, the matrix product can give the zero matrix: <span class="math display">\boldsymbol{A}\boldsymbol{B} = \begin{pmatrix} 1 &amp; 2\\ 2 &amp; 4\end{pmatrix}
     \begin{pmatrix} 2 &amp; -4\\ -1 &amp; 2\end{pmatrix}
     =
-    \begin{pmatrix} 0 &amp; 0\\ 0 &amp; 0\end{pmatrix}=\boldsymbol{0}.\]</span></p>
-<p>The following rules of calculation apply (provided the matrices are conformable): <span class="math display">\[\begin{array}{rrcl@{}r@{}}
+    \begin{pmatrix} 0 &amp; 0\\ 0 &amp; 0\end{pmatrix}=\boldsymbol{0}.</span></p>
+<p>The following rules of calculation apply (provided the matrices are conformable): <span class="math display">\begin{array}{rrcl@{}r@{}}
 \text{(i)}   &amp; \boldsymbol{A}(\boldsymbol{B}\boldsymbol{C})       &amp; = &amp; (\boldsymbol{A}\boldsymbol{B})\boldsymbol{C}\,     &amp;\text{(associativity)} \\
 \text{(ii)}  &amp;   \boldsymbol{A}(\boldsymbol{B}+\boldsymbol{D})    &amp; = &amp; \boldsymbol{A}\boldsymbol{B}+\boldsymbol{A}\boldsymbol{D}\,  &amp; \text{(distributivity)} \\
 \text{(iii)}   &amp;   (\boldsymbol{B}+\boldsymbol{D})\boldsymbol{C}    &amp; = &amp; \boldsymbol{B}\boldsymbol{C}+\boldsymbol{D}\boldsymbol{C}\,  &amp; \text{(distributivity)} \\
@@ -401,7 +414,7 @@ x_k y_1 &amp; x_k y_2 &amp; \ldots &amp; x_k y_m
 \text{(identity element)}     \\
 \text{(vii)} &amp;   (\boldsymbol{A}\boldsymbol{B})'  &amp; = &amp; \boldsymbol{B}'\boldsymbol{A}'\,         &amp; \text{(product transposition)} \\
 \text{(viii)} &amp;   (\boldsymbol{A}\boldsymbol{B} \boldsymbol C)'  &amp; = &amp; \boldsymbol C' \boldsymbol{B}'\boldsymbol{A}'\,  &amp; \text{(product transposition)}
-\end{array}\]</span></p>
+\end{array}</span></p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

@@ -71,8 +71,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <meta property="og:title" content="Crash Course in Matrix Algebra - 5&nbsp; Matrix calculus">
 <meta property="og:description" content="A Refresher on Matrix Algebra for Econometricians with Implementation in R">
@@ -197,38 +211,38 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Let <span class="math inline">\(f(\beta_1, \ldots, \beta_k) = f(\boldsymbol{\beta})\)</span> be a twice-differential real-valued function that depends on some vector <span class="math inline">\(\boldsymbol \beta = (\beta_1, \ldots, \beta_k)'\)</span>. Examples that frequently appear in econometrics are functions of the inner product form <span class="math inline">\(f(\boldsymbol \beta) = \boldsymbol a' \boldsymbol \beta\)</span>, where <span class="math inline">\(\boldsymbol a \in \mathbb R^k\)</span>, and functions of the sandwich form <span class="math inline">\(f(\boldsymbol \beta) = \boldsymbol \beta' \boldsymbol A \boldsymbol \beta\)</span>, where <span class="math inline">\(\boldsymbol A \in \mathbb R^{k \times k}\)</span>.</p>
+<p>Let <span class="math inline">f(\beta_1, \ldots, \beta_k) = f(\boldsymbol{\beta})</span> be a twice-differential real-valued function that depends on some vector <span class="math inline">\boldsymbol \beta = (\beta_1, \ldots, \beta_k)'</span>. Examples that frequently appear in econometrics are functions of the inner product form <span class="math inline">f(\boldsymbol \beta) = \boldsymbol a' \boldsymbol \beta</span>, where <span class="math inline">\boldsymbol a \in \mathbb R^k</span>, and functions of the sandwich form <span class="math inline">f(\boldsymbol \beta) = \boldsymbol \beta' \boldsymbol A \boldsymbol \beta</span>, where <span class="math inline">\boldsymbol A \in \mathbb R^{k \times k}</span>.</p>
 <section id="gradient" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="gradient"><span class="header-section-number">5.1</span> Gradient</h2>
-<p>The <strong>first derivatives vector</strong> or <strong>gradient</strong> is <span class="math display">\[
+<p>The <strong>first derivatives vector</strong> or <strong>gradient</strong> is <span class="math display">
 \frac{\partial f(\boldsymbol \beta)}{\partial\boldsymbol{\beta}}  = \begin{pmatrix}\frac{\partial f(\boldsymbol \beta)}{\partial \beta_1} \\ \vdots \\ \frac{\partial f(\boldsymbol \beta)}{\partial \beta_k} \end{pmatrix}
-\]</span> If the gradient is evaluated at some particular value <span class="math inline">\(\boldsymbol \beta = \boldsymbol b\)</span>, we write <span class="math display">\[
+</span> If the gradient is evaluated at some particular value <span class="math inline">\boldsymbol \beta = \boldsymbol b</span>, we write <span class="math display">
 \frac{\partial f}{\partial\boldsymbol{\beta}}(\boldsymbol b)
-\]</span> Useful properties for inner product and sandwich forms are <span class="math display">\[\begin{align*}
+</span> Useful properties for inner product and sandwich forms are <span class="math display">\begin{align*}
 (i)&amp; \quad &amp;&amp;\frac{\partial (\boldsymbol a' \boldsymbol \beta)}{\partial \boldsymbol \beta}  = \boldsymbol a \\
 (ii)&amp; \quad &amp;&amp;\frac{\partial ( \boldsymbol \beta' \boldsymbol A \boldsymbol \beta)}{\partial \boldsymbol \beta}   = (\boldsymbol A + \boldsymbol A') \boldsymbol \beta.
-\end{align*}\]</span></p>
+\end{align*}</span></p>
 </section>
 <section id="hessian" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="hessian"><span class="header-section-number">5.2</span> Hessian</h2>
-<p>The <strong>second derivatives matrix</strong> or <strong>Hessian</strong> is the <span class="math inline">\(k \times k\)</span> matrix <span class="math display">\[
+<p>The <strong>second derivatives matrix</strong> or <strong>Hessian</strong> is the <span class="math inline">k \times k</span> matrix <span class="math display">
     \frac{\partial^2 f(\boldsymbol \beta)}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}
     =  \begin{pmatrix}\frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_1 \partial \beta_1} &amp; \ldots &amp; \frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_k \partial \beta_1} \\
     \vdots &amp; &amp; \vdots \\
     \frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_1 \partial \beta_k} &amp; \ldots &amp; \frac{\partial^2 f(\boldsymbol \beta)}{\partial \beta_k \partial \beta_k}
-    \end{pmatrix}.\]</span></p>
-<p>If the Hessian is evaluated at some particular value <span class="math inline">\(\boldsymbol \beta = \boldsymbol b\)</span>, we write <span class="math display">\[
+    \end{pmatrix}.</span></p>
+<p>If the Hessian is evaluated at some particular value <span class="math inline">\boldsymbol \beta = \boldsymbol b</span>, we write <span class="math display">
 \frac{\partial^2 f}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}(\boldsymbol b)
-\]</span></p>
-<p>The Hessian is symmetric. Each column of the Hessian is the derivative of the components of the gradient for the corresponding variable in <span class="math inline">\(\boldsymbol \beta'\)</span>:</p>
-<span class="math display">\[\begin{align*}
+</span></p>
+<p>The Hessian is symmetric. Each column of the Hessian is the derivative of the components of the gradient for the corresponding variable in <span class="math inline">\boldsymbol \beta'</span>:</p>
+<span class="math display">\begin{align*}
 \frac{\partial^2 f(\boldsymbol \beta)}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}
     &amp;= \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \boldsymbol \beta'} \\
     &amp;= \Bigg[ \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \beta_1} \ \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \beta_2} \ \ldots \ \frac{\partial(\partial f(\boldsymbol \beta)/\partial \boldsymbol \beta)}{\partial \beta_n} \Bigg]
-\end{align*}\]</span>
-<p>The Hessian of a sandwich form function is <span class="math display">\[
+\end{align*}</span>
+<p>The Hessian of a sandwich form function is <span class="math display">
   \frac{\partial^2 ( \boldsymbol \beta' \boldsymbol A \boldsymbol \beta)}{\partial \boldsymbol \beta \partial \boldsymbol \beta'}  = \boldsymbol A + \boldsymbol A'.
-\]</span></p>
+</span></p>
 </section>
 <section id="optimization" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="optimization"><span class="header-section-number">5.3</span> Optimization</h2>
@@ -237,12 +251,12 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>First-order condition</strong>: the first derivative evaluated at the optimum is zero.</li>
 <li><strong>Second-order condition</strong>: the second derivative at the optimum is negative for a maximum and positive for a minimum.</li>
 </ul>
-<p>Similarly, we formulate first and second-order conditions for a function <span class="math inline">\(f(\boldsymbol \beta)\)</span>. The <strong>first-order condition</strong> for an optimum (maximum or minimum) at <span class="math inline">\(\boldsymbol b\)</span> is <span class="math display">\[
+<p>Similarly, we formulate first and second-order conditions for a function <span class="math inline">f(\boldsymbol \beta)</span>. The <strong>first-order condition</strong> for an optimum (maximum or minimum) at <span class="math inline">\boldsymbol b</span> is <span class="math display">
   \frac{\partial f}{\partial\boldsymbol{\beta}}(\boldsymbol b)  = \boldsymbol 0.
-\]</span> The <strong>second-order condition</strong> is <span class="math display">\[\begin{align*}
+</span> The <strong>second-order condition</strong> is <span class="math display">\begin{align*}
   &amp;\frac{\partial^2 f}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}(\boldsymbol b) &gt; 0 \quad \text{for a minimum at} \ \boldsymbol b, \\
   &amp;\frac{\partial^2 f}{\partial\boldsymbol{\beta }\partial \boldsymbol{\beta}'}(\boldsymbol b) &lt; 0 \quad \text{for a maximum at} \ \boldsymbol b.
-\end{align*}\]</span> Recall that, in the context of matrices, the notation “<span class="math inline">\(&gt; 0\)</span>” means positive definite, and “<span class="math inline">\(&lt; 0\)</span>” means negative definite.</p>
+\end{align*}</span> Recall that, in the context of matrices, the notation “<span class="math inline">&gt; 0</span>” means positive definite, and “<span class="math inline">&lt; 0</span>” means negative definite.</p>
 
 
 </section>

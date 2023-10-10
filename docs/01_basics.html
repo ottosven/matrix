@@ -98,7 +98,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 <meta property="og:title" content="Crash Course in Matrix Algebra - 1&nbsp; Basic definitions">
 <meta property="og:description" content="A Refresher on Matrix Algebra for Econometricians with Implementation in R">
 <meta property="og:site_name" content="Crash Course in Matrix Algebra">
@@ -213,54 +226,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><p>Let’s start with some basic definitions and specific examples.</p>
 <section id="scalar-vector-and-matrix" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="scalar-vector-and-matrix">
 <span class="header-section-number">1.1</span> Scalar, vector, and matrix</h2>
-<p>A <strong>scalar</strong> <span class="math inline">\(a\)</span> is a single real number. We write <span class="math inline">\(a \in \mathbb R\)</span>.</p>
-<p>A <strong>vector</strong> <span class="math inline">\(\boldsymbol a\)</span> of length <span class="math inline">\(k\)</span> is a <span class="math inline">\(k \times 1\)</span> list of real numbers <span class="math display">\[
+<p>A <strong>scalar</strong> <span class="math inline">a</span> is a single real number. We write <span class="math inline">a \in \mathbb R</span>.</p>
+<p>A <strong>vector</strong> <span class="math inline">\boldsymbol a</span> of length <span class="math inline">k</span> is a <span class="math inline">k \times 1</span> list of real numbers <span class="math display">
 \boldsymbol a = \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_k \end{pmatrix}.
-\]</span> By default, when we refer to a vector, we always mean a column vector. We write <span class="math inline">\(\boldsymbol a \in \mathbb R^k\)</span>. The value <span class="math inline">\(a_i\)</span> is called <span class="math inline">\(i\)</span>-th entry or <span class="math inline">\(i\)</span>-th component of <span class="math inline">\(\boldsymbol a\)</span>. A scalar is a vector of length 1. A row vector of length <span class="math inline">\(k\)</span> is written as <span class="math inline">\(\boldsymbol b = (b_1, \ldots, b_k)\)</span>.</p>
-<p>A <strong>matrix</strong> <span class="math inline">\(\boldsymbol A\)</span> of order <span class="math inline">\(k \times m\)</span> is a rectangular array of real numbers <span class="math display">\[\boldsymbol A =\begin{pmatrix}
+</span> By default, when we refer to a vector, we always mean a column vector. We write <span class="math inline">\boldsymbol a \in \mathbb R^k</span>. The value <span class="math inline">a_i</span> is called <span class="math inline">i</span>-th entry or <span class="math inline">i</span>-th component of <span class="math inline">\boldsymbol a</span>. A scalar is a vector of length 1. A row vector of length <span class="math inline">k</span> is written as <span class="math inline">\boldsymbol b = (b_1, \ldots, b_k)</span>.</p>
+<p>A <strong>matrix</strong> <span class="math inline">\boldsymbol A</span> of order <span class="math inline">k \times m</span> is a rectangular array of real numbers <span class="math display">\boldsymbol A =\begin{pmatrix}
              a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1m}\\
              a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2m}\\
              \vdots &amp; \vdots &amp;       &amp; \vdots\\
              a_{k1} &amp; a_{k2} &amp; \cdots &amp; a_{km}
-\end{pmatrix}\]</span> with <span class="math inline">\(k\)</span> rows and <span class="math inline">\(m\)</span> columns. We write <span class="math inline">\(\boldsymbol A \in \mathbb R^{k \times m}\)</span>. The value <span class="math inline">\(a_{ij}\)</span> is called <span class="math inline">\((i,j)\)</span>-th entry or <span class="math inline">\((i,j)\)</span>-th component of <span class="math inline">\(\boldsymbol A\)</span>. We also use the notation <span class="math inline">\((\boldsymbol A)_{i,j}\)</span> to denote the <span class="math inline">\((i,j)\)</span>-th entry. A vector of length <span class="math inline">\(k\)</span> is a <span class="math inline">\(k \times 1\)</span> matrix. A row vector of length <span class="math inline">\(k\)</span> is a <span class="math inline">\(1 \times k\)</span> matrix. A scalar is a matrix of order <span class="math inline">\(1 \times 1\)</span>.</p>
-<p>We may describe a matrix <span class="math inline">\(\boldsymbol A\)</span> by its column or row vectors as <span class="math display">\[
+\end{pmatrix}</span> with <span class="math inline">k</span> rows and <span class="math inline">m</span> columns. We write <span class="math inline">\boldsymbol A \in \mathbb R^{k \times m}</span>. The value <span class="math inline">a_{ij}</span> is called <span class="math inline">(i,j)</span>-th entry or <span class="math inline">(i,j)</span>-th component of <span class="math inline">\boldsymbol A</span>. We also use the notation <span class="math inline">(\boldsymbol A)_{i,j}</span> to denote the <span class="math inline">(i,j)</span>-th entry. A vector of length <span class="math inline">k</span> is a <span class="math inline">k \times 1</span> matrix. A row vector of length <span class="math inline">k</span> is a <span class="math inline">1 \times k</span> matrix. A scalar is a matrix of order <span class="math inline">1 \times 1</span>.</p>
+<p>We may describe a matrix <span class="math inline">\boldsymbol A</span> by its column or row vectors as <span class="math display">
 \boldsymbol A = \begin{pmatrix} \boldsymbol a_1 &amp; \boldsymbol a_2 &amp; \ldots &amp; \boldsymbol a_m \end{pmatrix}
 = \begin{pmatrix} \boldsymbol \alpha_1 \\ \vdots \\ \boldsymbol \alpha_k \end{pmatrix},
-\]</span> where <span class="math display">\[
+</span> where <span class="math display">
 \boldsymbol a_i = \begin{pmatrix} a_{1i} \\ \vdots \\ a_{ki} \end{pmatrix}
-\]</span> is the <span class="math inline">\(i\)</span>-th column of <span class="math inline">\(\boldsymbol A\)</span> and <span class="math inline">\(\boldsymbol \alpha_i = (a_{i1}, \ldots, a_{im})\)</span> is the <span class="math inline">\(i\)</span>-th row.</p>
+</span> is the <span class="math inline">i</span>-th column of <span class="math inline">\boldsymbol A</span> and <span class="math inline">\boldsymbol \alpha_i = (a_{i1}, \ldots, a_{im})</span> is the <span class="math inline">i</span>-th row.</p>
 </section><section id="some-specific-matrices" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="some-specific-matrices">
 <span class="header-section-number">1.2</span> Some specific matrices</h2>
-<p>A matrix is called <strong>square matrix</strong> if the numbers of rows and columns coincide (i.e., <span class="math inline">\(k=m\)</span>). <span class="math display">\[\boldsymbol{B} = \begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\]</span> is a square matrix. A square matrix is called <strong>diagonal matrix</strong> if all off-diagonal elements are zero. <span class="math display">\[\boldsymbol{C} = \begin{pmatrix}1 &amp; 0 \\ 0 &amp; 4 \end{pmatrix}\]</span> is a diagonal matrix. We also write <span class="math inline">\(\boldsymbol C = \mathop{\mathrm{diag}}(1,4)\)</span>. A square matrix is called <strong>upper triangular</strong> if all elements below the main diagonal are zero, and <strong>lower triangular</strong> if all elements above the main diagonal are zero. Examples of an upper triangular matrix <span class="math inline">\(\boldsymbol D\)</span> and a lower triangular matrix <span class="math inline">\(\boldsymbol E\)</span> are <span class="math display">\[\boldsymbol{D} = \begin{pmatrix}1 &amp; 2 \\ 0 &amp; 4 \end{pmatrix},
+<p>A matrix is called <strong>square matrix</strong> if the numbers of rows and columns coincide (i.e., <span class="math inline">k=m</span>). <span class="math display">\boldsymbol{B} = \begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}</span> is a square matrix. A square matrix is called <strong>diagonal matrix</strong> if all off-diagonal elements are zero. <span class="math display">\boldsymbol{C} = \begin{pmatrix}1 &amp; 0 \\ 0 &amp; 4 \end{pmatrix}</span> is a diagonal matrix. We also write <span class="math inline">\boldsymbol C = \mathop{\mathrm{diag}}(1,4)</span>. A square matrix is called <strong>upper triangular</strong> if all elements below the main diagonal are zero, and <strong>lower triangular</strong> if all elements above the main diagonal are zero. Examples of an upper triangular matrix <span class="math inline">\boldsymbol D</span> and a lower triangular matrix <span class="math inline">\boldsymbol E</span> are <span class="math display">\boldsymbol{D} = \begin{pmatrix}1 &amp; 2 \\ 0 &amp; 4 \end{pmatrix},
 \quad
 \boldsymbol{E} = \begin{pmatrix}1 &amp; 0 \\ 3 &amp; 4 \end{pmatrix}.
-\]</span> The <span class="math inline">\(k \times k\)</span> diagonal matrix <span class="math display">\[\boldsymbol{I}_k=
+</span> The <span class="math inline">k \times k</span> diagonal matrix <span class="math display">\boldsymbol{I}_k=
       \begin{pmatrix}
       1      &amp; 0      &amp; \cdots &amp; 0\\
       0      &amp; 1      &amp; \cdots &amp; 0\\
       \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
       0      &amp; 0      &amp; \cdots &amp; 1
-      \end{pmatrix} = \mathop{\mathrm{diag}}(1, \ldots, 1)\]</span> is called <strong>identity matrix</strong> of order <span class="math inline">\(k\)</span>. The <span class="math inline">\(k \times m\)</span> matrix <span class="math display">\[\boldsymbol{0}_{k\times m}
+      \end{pmatrix} = \mathop{\mathrm{diag}}(1, \ldots, 1)</span> is called <strong>identity matrix</strong> of order <span class="math inline">k</span>. The <span class="math inline">k \times m</span> matrix <span class="math display">\boldsymbol{0}_{k\times m}
        =\begin{pmatrix}
              0      &amp; \cdots &amp; 0\\
             \vdots &amp;  \ddots      &amp; \vdots\\
             0      &amp; \cdots &amp; 0
        \end{pmatrix}
-      \]</span> is called <strong>zero matrix</strong>. The <strong>zero vector</strong> of length <span class="math inline">\(k\)</span> is <span class="math display">\[\boldsymbol{0}_{k}
+      </span> is called <strong>zero matrix</strong>. The <strong>zero vector</strong> of length <span class="math inline">k</span> is <span class="math display">\boldsymbol{0}_{k}
        =\begin{pmatrix}
              0   \\
             \vdots \\
             0
        \end{pmatrix}.
-      \]</span> If the order becomes clear from the context, we omit the indices and write <span class="math inline">\(\boldsymbol I\)</span> for the identity matrix and <span class="math inline">\(\boldsymbol 0\)</span> for the zero matrix or zero vector.</p>
+      </span> If the order becomes clear from the context, we omit the indices and write <span class="math inline">\boldsymbol I</span> for the identity matrix and <span class="math inline">\boldsymbol 0</span> for the zero matrix or zero vector.</p>
 </section><section id="transposition" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="transposition">
 <span class="header-section-number">1.3</span> Transposition</h2>
-<p>The <strong>transpose</strong> <span class="math inline">\(\boldsymbol A'\)</span> of the matrix <span class="math inline">\(\boldsymbol A\)</span> is obtained by flipping rows and columns on the main diagonal: <span class="math display">\[\boldsymbol{A}'=\begin{pmatrix}
+<p>The <strong>transpose</strong> <span class="math inline">\boldsymbol A'</span> of the matrix <span class="math inline">\boldsymbol A</span> is obtained by flipping rows and columns on the main diagonal: <span class="math display">\boldsymbol{A}'=\begin{pmatrix}
     a_{11} &amp; a_{21} &amp; \cdots &amp; a_{k1}\\
     a_{12} &amp; a_{22} &amp; \cdots &amp; a_{k2}\\
     \vdots &amp; \vdots &amp;       &amp; \vdots\\
     a_{1m} &amp; a_{2m} &amp; \cdots &amp; a_{km}
-\end{pmatrix}.\]</span> If <span class="math inline">\(\boldsymbol A\)</span> is a matrix of order <span class="math inline">\(k\times m\)</span>, then <span class="math inline">\(\boldsymbol A'\)</span> is a matrix of order <span class="math inline">\(m \times k\)</span>. <em>Example:</em> <span class="math display">\[\boldsymbol{A}=\begin{pmatrix}
+\end{pmatrix}.</span> If <span class="math inline">\boldsymbol A</span> is a matrix of order <span class="math inline">k\times m</span>, then <span class="math inline">\boldsymbol A'</span> is a matrix of order <span class="math inline">m \times k</span>. <em>Example:</em> <span class="math display">\boldsymbol{A}=\begin{pmatrix}
         1 &amp; 2\\
         4 &amp; 5\\
         7 &amp; 8
@@ -268,12 +281,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \boldsymbol{A}'=\begin{pmatrix}
         1 &amp; 4 &amp; 7\\
         2 &amp; 5 &amp; 8
-\end{pmatrix}\]</span> The definition implies that transposing twice produces the original matrix: <span class="math display">\[
+\end{pmatrix}</span> The definition implies that transposing twice produces the original matrix: <span class="math display">
 (\boldsymbol A')' = \boldsymbol A.
-\]</span> The transpose of a (column) vector is a row vector: <span class="math display">\[
+</span> The transpose of a (column) vector is a row vector: <span class="math display">
 \boldsymbol a' = (a_1, \ldots, a_k)
-\]</span></p>
-<p>A <strong>symmetric matrix</strong> is a square matrix <span class="math inline">\(\boldsymbol A\)</span> with <span class="math inline">\(\boldsymbol{A}'=\boldsymbol{A}\)</span>. An example of a symmetric matrix is <span class="math display">\[\boldsymbol A = \begin{aligned}         \left(\begin{matrix}1 &amp; 2 \\ 2 &amp; 4 \end{matrix}\right)\end{aligned}.\]</span></p>
+</span></p>
+<p>A <strong>symmetric matrix</strong> is a square matrix <span class="math inline">\boldsymbol A</span> with <span class="math inline">\boldsymbol{A}'=\boldsymbol{A}</span>. An example of a symmetric matrix is <span class="math display">\boldsymbol A = \begin{aligned}         \left(\begin{matrix}1 &amp; 2 \\ 2 &amp; 4 \end{matrix}\right)\end{aligned}.</span></p>
 </section><section id="matrices-in-r" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="matrices-in-r">
 <span class="header-section-number">1.4</span> Matrices in <code>R</code>
 </h2>

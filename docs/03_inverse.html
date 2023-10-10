@@ -98,7 +98,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 <meta property="og:title" content="Crash Course in Matrix Algebra - 3&nbsp; Rank and inverse">
 <meta property="og:description" content="A Refresher on Matrix Algebra for Econometricians with Implementation in R">
 <meta property="og:site_name" content="Crash Course in Matrix Algebra">
@@ -213,36 +226,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><section id="linear-combination" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="linear-combination">
 <span class="header-section-number">3.1</span> Linear combination</h2>
-<p>Let <span class="math inline">\(\boldsymbol x_1, \ldots, \boldsymbol x_n\)</span> be vectors of the same order, and let <span class="math inline">\(\lambda_1, \ldots, \lambda_n\)</span> be scalars. The vector <span class="math display">\[ \lambda_1 \boldsymbol x_1 + \lambda_2 \boldsymbol x_2 + \ldots + \lambda_n \boldsymbol x_n \]</span></p>
-<p>is called <strong>linear combination</strong> of <span class="math inline">\(\boldsymbol x_1, \ldots, \boldsymbol x_n\)</span>. A linear combination can also be written as a matrix-vector product. Let <span class="math inline">\(\boldsymbol X =\begin{pmatrix} \boldsymbol x_1 &amp; \ldots &amp; \boldsymbol x_n \end{pmatrix}\)</span> be the matrix with columns <span class="math inline">\(\boldsymbol x_1, \ldots, \boldsymbol x_n\)</span>, and let <span class="math inline">\(\boldsymbol \lambda = (\lambda_1, \ldots, \lambda_n)'\)</span>. Then, <span class="math display">\[ \lambda_1 \boldsymbol x_1 + \lambda_2 \boldsymbol x_2 + \ldots + \lambda_n \boldsymbol x_n = \boldsymbol X \boldsymbol \lambda.\]</span> The vectors <span class="math inline">\(\boldsymbol x_1, \ldots, \boldsymbol x_n\)</span> are called <strong>linearly dependent</strong> if at least one can be written as a linear combination of the others. That is, there exists a nonzero vector <span class="math inline">\(\boldsymbol \lambda\)</span> with <span class="math display">\[
+<p>Let <span class="math inline">\boldsymbol x_1, \ldots, \boldsymbol x_n</span> be vectors of the same order, and let <span class="math inline">\lambda_1, \ldots, \lambda_n</span> be scalars. The vector <span class="math display"> \lambda_1 \boldsymbol x_1 + \lambda_2 \boldsymbol x_2 + \ldots + \lambda_n \boldsymbol x_n </span></p>
+<p>is called <strong>linear combination</strong> of <span class="math inline">\boldsymbol x_1, \ldots, \boldsymbol x_n</span>. A linear combination can also be written as a matrix-vector product. Let <span class="math inline">\boldsymbol X =\begin{pmatrix} \boldsymbol x_1 &amp; \ldots &amp; \boldsymbol x_n \end{pmatrix}</span> be the matrix with columns <span class="math inline">\boldsymbol x_1, \ldots, \boldsymbol x_n</span>, and let <span class="math inline">\boldsymbol \lambda = (\lambda_1, \ldots, \lambda_n)'</span>. Then, <span class="math display"> \lambda_1 \boldsymbol x_1 + \lambda_2 \boldsymbol x_2 + \ldots + \lambda_n \boldsymbol x_n = \boldsymbol X \boldsymbol \lambda.</span> The vectors <span class="math inline">\boldsymbol x_1, \ldots, \boldsymbol x_n</span> are called <strong>linearly dependent</strong> if at least one can be written as a linear combination of the others. That is, there exists a nonzero vector <span class="math inline">\boldsymbol \lambda</span> with <span class="math display">
 \boldsymbol X \boldsymbol \lambda = \lambda_1 \boldsymbol x_1 + \ldots + \lambda_n \boldsymbol x_n = \boldsymbol 0.
-\]</span> The vectors <span class="math inline">\(\boldsymbol x_1, \ldots, \boldsymbol x_n\)</span> are called <strong>linearly independent</strong> if <span class="math display">\[
+</span> The vectors <span class="math inline">\boldsymbol x_1, \ldots, \boldsymbol x_n</span> are called <strong>linearly independent</strong> if <span class="math display">
 \boldsymbol X \boldsymbol \lambda = \lambda_1 \boldsymbol x_1 + \ldots + \lambda_n \boldsymbol x_n \neq \boldsymbol 0
-\]</span> for all nonzero vectors <span class="math inline">\(\boldsymbol \lambda\)</span>.</p>
-<p>To check whether the vectors are linearly independent, we can solve the system of equations <span class="math inline">\(\boldsymbol X \boldsymbol \lambda = \boldsymbol 0\)</span> by Gaussian elimination. If <span class="math inline">\(\boldsymbol \lambda = \boldsymbol 0\)</span> is the only solution, then the columns of <span class="math inline">\(\boldsymbol X\)</span> are linearly independent. If there is a solution <span class="math inline">\(\boldsymbol \lambda\)</span> with <span class="math inline">\(\boldsymbol \lambda \neq \boldsymbol 0\)</span>, then the columns of <span class="math inline">\(\boldsymbol X\)</span> are linearly dependent.</p>
+</span> for all nonzero vectors <span class="math inline">\boldsymbol \lambda</span>.</p>
+<p>To check whether the vectors are linearly independent, we can solve the system of equations <span class="math inline">\boldsymbol X \boldsymbol \lambda = \boldsymbol 0</span> by Gaussian elimination. If <span class="math inline">\boldsymbol \lambda = \boldsymbol 0</span> is the only solution, then the columns of <span class="math inline">\boldsymbol X</span> are linearly independent. If there is a solution <span class="math inline">\boldsymbol \lambda</span> with <span class="math inline">\boldsymbol \lambda \neq \boldsymbol 0</span>, then the columns of <span class="math inline">\boldsymbol X</span> are linearly dependent.</p>
 </section><section id="column-rank" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="column-rank">
 <span class="header-section-number">3.2</span> Column rank</h2>
-<p>The <strong>rank</strong> of a <span class="math inline">\(k \times m\)</span> matrix <span class="math inline">\(\boldsymbol A = \begin{pmatrix} \boldsymbol a_1 &amp; \ldots &amp; \boldsymbol a_m \end{pmatrix}\)</span>, written as <span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol A)\)</span>, is the number of linearly independent columns <span class="math inline">\(\boldsymbol a_i\)</span>. We say that <span class="math inline">\(\boldsymbol A\)</span> has <strong>full column rank</strong> if <span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol X) = m\)</span>.</p>
-<p>The identity matrix <span class="math inline">\(\boldsymbol I_k\)</span> has full column rank (i.e., <span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol I_n) = k\)</span>). As another example, consider <span class="math display">\[
+<p>The <strong>rank</strong> of a <span class="math inline">k \times m</span> matrix <span class="math inline">\boldsymbol A = \begin{pmatrix} \boldsymbol a_1 &amp; \ldots &amp; \boldsymbol a_m \end{pmatrix}</span>, written as <span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol A)</span>, is the number of linearly independent columns <span class="math inline">\boldsymbol a_i</span>. We say that <span class="math inline">\boldsymbol A</span> has <strong>full column rank</strong> if <span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol X) = m</span>.</p>
+<p>The identity matrix <span class="math inline">\boldsymbol I_k</span> has full column rank (i.e., <span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol I_n) = k</span>). As another example, consider <span class="math display">
 \boldsymbol X = \begin{pmatrix} 2 &amp; 1 &amp; 4 \\ 0 &amp; 1 &amp; 2 \end{pmatrix},
-\]</span> which has linearly dependent columns since the third column is a linear combination of the first two columns: <span class="math display">\[
+</span> which has linearly dependent columns since the third column is a linear combination of the first two columns: <span class="math display">
 \begin{pmatrix} 4 \\ 2 \end{pmatrix} = 1 \begin{pmatrix} 2 \\ 0 \end{pmatrix} + 2 \begin{pmatrix} 1 \\ 1 \end{pmatrix}.
-\]</span> The first two columns are linearly independent since <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 = 0\)</span> are the only solutions to the equation <span class="math display">\[
+</span> The first two columns are linearly independent since <span class="math inline">\lambda_1 = 0</span> and <span class="math inline">\lambda_2 = 0</span> are the only solutions to the equation <span class="math display">
 \lambda_1 \begin{pmatrix} 2 \\ 0 \end{pmatrix} + \lambda_2 \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
-\]</span> Therefore, we have <span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol X) = 2\)</span>, i.e., <span class="math inline">\(\boldsymbol X\)</span> does not have a full column rank.</p>
+</span> Therefore, we have <span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol X) = 2</span>, i.e., <span class="math inline">\boldsymbol X</span> does not have a full column rank.</p>
 <p>Some useful properties are</p>
 <ol type="i">
-<li><span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol A) \leq \min(k,m)\)</span></li>
-<li><span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A')\)</span></li>
-<li><span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol A \boldsymbol B) = \min(\mathop{\mathrm{rank}}(\boldsymbol A), \mathop{\mathrm{rank}}(\boldsymbol B))\)</span></li>
+<li><span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol A) \leq \min(k,m)</span></li>
+<li><span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A')</span></li>
+<li><span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol A \boldsymbol B) = \min(\mathop{\mathrm{rank}}(\boldsymbol A), \mathop{\mathrm{rank}}(\boldsymbol B))</span></li>
 <li>
-<span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A' \boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A \boldsymbol A')\)</span>.</li>
+<span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A' \boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A \boldsymbol A')</span>.</li>
 </ol>
-<p>We can use the <code><a href="https://rdrr.io/r/base/qr.html">qr()</a></code> function to extract the rank in <code>R</code>. Let’s compute the rank of the matrices <span class="math display">\[
+<p>We can use the <code><a href="https://rdrr.io/r/base/qr.html">qr()</a></code> function to extract the rank in <code>R</code>. Let’s compute the rank of the matrices <span class="math display">
 \boldsymbol A = \begin{pmatrix}
 1 &amp; 2 &amp; 3 \\ 3 &amp; 9 &amp; 1 \\ 0 &amp; 11 &amp; 5
 \end{pmatrix},
-\]</span> <span class="math inline">\(\boldsymbol B = \boldsymbol I_3\)</span>, and <span class="math inline">\(\boldsymbol X\)</span> from the example above:</p>
+</span> <span class="math inline">\boldsymbol B = \boldsymbol I_3</span>, and <span class="math inline">\boldsymbol X</span> from the example above:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">9</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/qr.html">qr</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">$</span><span class="va">rank</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -262,17 +275,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section><section id="nonsingular-matrix" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="nonsingular-matrix">
 <span class="header-section-number">3.3</span> Nonsingular matrix</h2>
-<p>A square <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(\boldsymbol A\)</span> is called <strong>nonsingular</strong> if it has full rank, i.e., <span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol A) = k\)</span>. Conversely, <span class="math inline">\(\boldsymbol A\)</span> is called <strong>singular</strong> if it does not have full rank, i.e., <span class="math inline">\(\mathop{\mathrm{rank}}(\boldsymbol A) &lt; k\)</span>.</p>
+<p>A square <span class="math inline">k \times k</span> matrix <span class="math inline">\boldsymbol A</span> is called <strong>nonsingular</strong> if it has full rank, i.e., <span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol A) = k</span>. Conversely, <span class="math inline">\boldsymbol A</span> is called <strong>singular</strong> if it does not have full rank, i.e., <span class="math inline">\mathop{\mathrm{rank}}(\boldsymbol A) &lt; k</span>.</p>
 </section><section id="determinant" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="determinant">
 <span class="header-section-number">3.4</span> Determinant</h2>
-<p>Consider a square <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(\boldsymbol A\)</span>. The determinant <span class="math inline">\(\det(\boldsymbol A)\)</span> is a measure of the volume of the geometric object formed by the columns of <span class="math inline">\(\boldsymbol A\)</span> (a parallelogram for <span class="math inline">\(k=2\)</span>, a parallelepiped for <span class="math inline">\(k=3\)</span>, a hyper-parallelepiped for <span class="math inline">\(k&gt;3\)</span>). For <span class="math inline">\(2 \times 2\)</span> matrices, the determinant is easy to calculate: <span class="math display">\[
+<p>Consider a square <span class="math inline">k \times k</span> matrix <span class="math inline">\boldsymbol A</span>. The determinant <span class="math inline">\det(\boldsymbol A)</span> is a measure of the volume of the geometric object formed by the columns of <span class="math inline">\boldsymbol A</span> (a parallelogram for <span class="math inline">k=2</span>, a parallelepiped for <span class="math inline">k=3</span>, a hyper-parallelepiped for <span class="math inline">k&gt;3</span>). For <span class="math inline">2 \times 2</span> matrices, the determinant is easy to calculate: <span class="math display">
 \boldsymbol A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}, \quad
 \det(\boldsymbol A) = ad - bc.
-\]</span></p>
-<p>If <span class="math inline">\(\boldsymbol A\)</span> is triangular (upper or lower), the determinant is the product of the diagonal entries, i.e., <span class="math inline">\(\det(\boldsymbol A) = \prod_{i=1}^k a_{ii}\)</span>. Hence, Gaussian elimination can be used to compute the determinant by transforming the matrix to a triangular one. The exact definition of the determinant is technical and of little importance to us. A useful relation is the following: <span class="math display">\[\begin{align*}
+</span></p>
+<p>If <span class="math inline">\boldsymbol A</span> is triangular (upper or lower), the determinant is the product of the diagonal entries, i.e., <span class="math inline">\det(\boldsymbol A) = \prod_{i=1}^k a_{ii}</span>. Hence, Gaussian elimination can be used to compute the determinant by transforming the matrix to a triangular one. The exact definition of the determinant is technical and of little importance to us. A useful relation is the following: <span class="math display">\begin{align*}
   \det(\boldsymbol A) = 0 \quad &amp;\Leftrightarrow \quad \boldsymbol A \ \text{is singular} \\
    \det(\boldsymbol A) \neq 0 \quad &amp;\Leftrightarrow \quad \boldsymbol A \ \text{is nonsingular}.
-\end{align*}\]</span></p>
+\end{align*}</span></p>
 <p>In <code>R</code>, we have the <code><a href="https://rdrr.io/r/base/det.html">det()</a></code> function to compute the determinant:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -284,16 +297,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
-<p>Since <span class="math inline">\(\det(\boldsymbol A) \neq 0\)</span> and <span class="math inline">\(\det(\boldsymbol B) = 0\)</span>, we conclude that <span class="math inline">\(\boldsymbol A\)</span> is nonsingular and <span class="math inline">\(\boldsymbol B\)</span> is singular.</p>
+<p>Since <span class="math inline">\det(\boldsymbol A) \neq 0</span> and <span class="math inline">\det(\boldsymbol B) = 0</span>, we conclude that <span class="math inline">\boldsymbol A</span> is nonsingular and <span class="math inline">\boldsymbol B</span> is singular.</p>
 </section><section id="inverse-matrix" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="inverse-matrix">
 <span class="header-section-number">3.5</span> Inverse matrix</h2>
-<p>The <strong>inverse</strong> <span class="math inline">\(\boldsymbol{A}^{-1}\)</span> of a square <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(\boldsymbol A\)</span> is defined by the property <span class="math display">\[\boldsymbol{A} \boldsymbol{A}^{-1} = \boldsymbol{A}^{-1} \boldsymbol{A} =\boldsymbol{I}_k.\]</span> When multiplied from the left or the right, the inverse matrix produces the identity matrix. The inverse exists if and only if <span class="math inline">\(\boldsymbol{A}\)</span> is nonsingular, i.e., <span class="math inline">\(\det(\boldsymbol A) \neq 0\)</span>. Therefore, a nonsingular matrix is also called <strong>invertible matrix</strong>. Note that only square matrices can be inverted.</p>
-<p>For <span class="math inline">\(2 \times 2\)</span> matrices, there exists a simple formula: <span class="math display">\[\boldsymbol{A}^{-1} = \frac{1}{\det(\boldsymbol{A})} \begin{pmatrix}d&amp;-b\\-c&amp;a\end{pmatrix}\,,\]</span> where <span class="math inline">\(\det(\boldsymbol{A}) = ad - bc\)</span>. We swap the main diagonal elements, reverse the sign of the off-diagonal elements, and divide all entries by the determinant. <em>Example:</em> <span class="math display">\[\displaystyle\boldsymbol{A}=\begin{pmatrix}5&amp;6\\1&amp;2\end{pmatrix}\]</span> We have <span class="math inline">\(\det(\boldsymbol{A}) = ad-bc=5\cdot2-6\cdot1=4\)</span>, and <span class="math display">\[\boldsymbol{A}^{-1}= \frac{1}{4} \cdot \begin{pmatrix}2&amp;-6\\-1&amp;5\end{pmatrix}.\]</span> Indeed, <span class="math inline">\(\boldsymbol A^{-1}\)</span> is the inverse of <span class="math inline">\(\boldsymbol A\)</span> since <span class="math display">\[\boldsymbol{A}\boldsymbol{A}^{-1}
+<p>The <strong>inverse</strong> <span class="math inline">\boldsymbol{A}^{-1}</span> of a square <span class="math inline">k \times k</span> matrix <span class="math inline">\boldsymbol A</span> is defined by the property <span class="math display">\boldsymbol{A} \boldsymbol{A}^{-1} = \boldsymbol{A}^{-1} \boldsymbol{A} =\boldsymbol{I}_k.</span> When multiplied from the left or the right, the inverse matrix produces the identity matrix. The inverse exists if and only if <span class="math inline">\boldsymbol{A}</span> is nonsingular, i.e., <span class="math inline">\det(\boldsymbol A) \neq 0</span>. Therefore, a nonsingular matrix is also called <strong>invertible matrix</strong>. Note that only square matrices can be inverted.</p>
+<p>For <span class="math inline">2 \times 2</span> matrices, there exists a simple formula: <span class="math display">\boldsymbol{A}^{-1} = \frac{1}{\det(\boldsymbol{A})} \begin{pmatrix}d&amp;-b\\-c&amp;a\end{pmatrix}\,,</span> where <span class="math inline">\det(\boldsymbol{A}) = ad - bc</span>. We swap the main diagonal elements, reverse the sign of the off-diagonal elements, and divide all entries by the determinant. <em>Example:</em> <span class="math display">\displaystyle\boldsymbol{A}=\begin{pmatrix}5&amp;6\\1&amp;2\end{pmatrix}</span> We have <span class="math inline">\det(\boldsymbol{A}) = ad-bc=5\cdot2-6\cdot1=4</span>, and <span class="math display">\boldsymbol{A}^{-1}= \frac{1}{4} \cdot \begin{pmatrix}2&amp;-6\\-1&amp;5\end{pmatrix}.</span> Indeed, <span class="math inline">\boldsymbol A^{-1}</span> is the inverse of <span class="math inline">\boldsymbol A</span> since <span class="math display">\boldsymbol{A}\boldsymbol{A}^{-1}
 =\begin{pmatrix}5&amp;6\\1&amp;2\end{pmatrix} \cdot \frac{1}{4} \cdot \begin{pmatrix}2&amp;-6\\-1&amp;5\end{pmatrix}
 =\frac{1}{4} \cdot \begin{pmatrix}4&amp;0\\0&amp;4\end{pmatrix}
 = \left(\begin{matrix}1 &amp; 0 \\ 0 &amp; 1 \end{matrix}\right)
-= \boldsymbol{I}_2.\]</span></p>
-<p>One way to calculate the inverse of higher order square matrices is to solve equation <span class="math inline">\(\boldsymbol A \boldsymbol A^{-1} = \boldsymbol I\)</span> with Gaussian elimination. <code>R</code> can compute the inverse matrix quickly using the function <code><a href="https://rdrr.io/r/base/solve.html">solve()</a></code>:</p>
+= \boldsymbol{I}_2.</span></p>
+<p>One way to calculate the inverse of higher order square matrices is to solve equation <span class="math inline">\boldsymbol A \boldsymbol A^{-1} = \boldsymbol I</span> with Gaussian elimination. <code>R</code> can compute the inverse matrix quickly using the function <code><a href="https://rdrr.io/r/base/solve.html">solve()</a></code>:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span> <span class="co">#inverse if A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -303,30 +316,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [3,]  0.3203883 -0.10679612  0.02912621</code></pre>
 </div>
 </div>
-<p>We have the following relationship between invertibility, rank, and determinant of a square matrix <span class="math inline">\(\boldsymbol A\)</span>:</p>
-<span class="math display">\[\begin{align*}
+<p>We have the following relationship between invertibility, rank, and determinant of a square matrix <span class="math inline">\boldsymbol A</span>:</p>
+<span class="math display">\begin{align*}
   &amp;\boldsymbol A \ \text{is nonsingular} \\
   \Leftrightarrow \quad &amp;\text{all columns of} \ \boldsymbol A \ \text{are linearly independent} \\
   \Leftrightarrow \quad &amp;\boldsymbol A \ \text{has full column rank} \\
   \Leftrightarrow \quad &amp;\text{the determinant is nonzero} \ (\det(\boldsymbol A) \neq 0).
-\end{align*}\]</span>
-<p>Similarly, <span class="math display">\[\begin{align*}
+\end{align*}</span>
+<p>Similarly, <span class="math display">\begin{align*}
   &amp;\boldsymbol A \ \text{is singular} \\
   \Leftrightarrow \quad &amp;\boldsymbol A \ \text{has linearly dependent columns} \\
   \Leftrightarrow \quad &amp;\boldsymbol A \ \text{does not have full rank} \\
   \Leftrightarrow \quad &amp;\text{the determinant is zero} \ (\det(\boldsymbol A) = 0).
-\end{align*}\]</span></p>
+\end{align*}</span></p>
 <p>Below you will find some important properties for nonsingular matrices:</p>
 <ol type="i">
-<li><span class="math inline">\((\boldsymbol{A}^{-1})^{-1} = \boldsymbol{A}\)</span></li>
-<li><span class="math inline">\((\boldsymbol{A}')^{-1} = (\boldsymbol{A}^{-1})'\)</span></li>
+<li><span class="math inline">(\boldsymbol{A}^{-1})^{-1} = \boldsymbol{A}</span></li>
+<li><span class="math inline">(\boldsymbol{A}')^{-1} = (\boldsymbol{A}^{-1})'</span></li>
 <li>
-<span class="math inline">\((\lambda\boldsymbol{A})^{-1} = \frac{1}{\lambda}\boldsymbol{A}^{-1}\)</span> for any <span class="math inline">\(\lambda \neq 0\)</span>
+<span class="math inline">(\lambda\boldsymbol{A})^{-1} = \frac{1}{\lambda}\boldsymbol{A}^{-1}</span> for any <span class="math inline">\lambda \neq 0</span>
 </li>
-<li><span class="math inline">\(\det(\boldsymbol A^{-1}) = \frac{1}{\det(\boldsymbol A)}\)</span></li>
-<li><span class="math inline">\((\boldsymbol{A} \boldsymbol{B})^{-1} = \boldsymbol{B}^{-1} \boldsymbol{A}^{-1}\)</span></li>
-<li><span class="math inline">\((\boldsymbol A \boldsymbol B \boldsymbol C)^{-1} = \boldsymbol C^{-1} \boldsymbol B^{-1} \boldsymbol A^{-1}\)</span></li>
-<li>If <span class="math inline">\(\boldsymbol{A}\)</span> is symmetric, then <span class="math inline">\(\boldsymbol{A}^{-1}\)</span> is symmetric.</li>
+<li><span class="math inline">\det(\boldsymbol A^{-1}) = \frac{1}{\det(\boldsymbol A)}</span></li>
+<li><span class="math inline">(\boldsymbol{A} \boldsymbol{B})^{-1} = \boldsymbol{B}^{-1} \boldsymbol{A}^{-1}</span></li>
+<li><span class="math inline">(\boldsymbol A \boldsymbol B \boldsymbol C)^{-1} = \boldsymbol C^{-1} \boldsymbol B^{-1} \boldsymbol A^{-1}</span></li>
+<li>If <span class="math inline">\boldsymbol{A}</span> is symmetric, then <span class="math inline">\boldsymbol{A}^{-1}</span> is symmetric.</li>
 </ol>
 
 

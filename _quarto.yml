@@ -30,10 +30,12 @@ format:
     include-in-header: preamble-latex.tex
     documentclass: scrreprt
     fig-align: center
+    pdf-engine: pdflatex
   html:
     theme:
       light: [flatly, theme.scss]
       dark: [flatly, darkly, theme.scss]
+    html-math-method: katex
     monofont: Fira Mono
     mathfont: Leto
     number-sections: true
