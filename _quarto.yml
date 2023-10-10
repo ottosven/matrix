@@ -35,7 +35,9 @@ format:
     theme:
       light: [flatly, theme.scss]
       dark: [flatly, darkly, theme.scss]
-    html-math-method: katex
+    html-math-method:
+      method: mathjax
+      url: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML"
     monofont: Fira Mono
     mathfont: Leto
     number-sections: true
