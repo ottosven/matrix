@@ -57,7 +57,7 @@ Some useful properties are
 
 i)  $\mathop{\mathrm{rank}}(\boldsymbol A) \leq \min(k,m)$
 ii) $\mathop{\mathrm{rank}}(\boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A')$
-iii) $\mathop{\mathrm{rank}}(\boldsymbol A \boldsymbol B) = \min(\mathop{\mathrm{rank}}(\boldsymbol A), \mathop{\mathrm{rank}}(\boldsymbol B))$
+iii) $\mathop{\mathrm{rank}}(\boldsymbol A \boldsymbol B)\leq \min(\mathop{\mathrm{rank}}(\boldsymbol A), \mathop{\mathrm{rank}}(\boldsymbol B))$
 iv) $\mathop{\mathrm{rank}}(\boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A' \boldsymbol A) = \mathop{\mathrm{rank}}(\boldsymbol A \boldsymbol A')$.
 
 We can use the `qr()` function to extract the rank in `R`. Let's compute

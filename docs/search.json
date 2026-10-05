@@ -30,11 +30,11 @@
     ]
   },
   {
-    "objectID": "01_basics.html#scalar-vector-and-matrix",
-    "href": "01_basics.html#scalar-vector-and-matrix",
+    "objectID": "01_basics.html",
+    "href": "01_basics.html",
     "title": "\n1  Basic definitions\n",
-    "section": "\n1.1 Scalar, vector, and matrix",
-    "text": "1.1 Scalar, vector, and matrix\nA scalar \\(a\\) is a single real number. We write \\(a \\in \\mathbb R\\).\nA vector \\(\\boldsymbol a\\) of length \\(k\\) is a \\(k \\times 1\\) list of real numbers \\[\n\\boldsymbol a = \\begin{pmatrix} a_1 \\\\ a_2 \\\\ \\vdots \\\\ a_k \\end{pmatrix}.\n\\] By default, when we refer to a vector, we always mean a column vector. We write \\(\\boldsymbol a \\in \\mathbb R^k\\). The value \\(a_i\\) is called \\(i\\)-th entry or \\(i\\)-th component of \\(\\boldsymbol a\\). A scalar is a vector of length 1. A row vector of length \\(k\\) is written as \\(\\boldsymbol b = (b_1, \\ldots, b_k)\\).\nA matrix \\(\\boldsymbol A\\) of order \\(k \\times m\\) is a rectangular array of real numbers \\[\\boldsymbol A =\\begin{pmatrix}\n             a_{11} & a_{12} & \\cdots & a_{1m}\\\\\n             a_{21} & a_{22} & \\cdots & a_{2m}\\\\\n             \\vdots & \\vdots &       & \\vdots\\\\\n             a_{k1} & a_{k2} & \\cdots & a_{km}\n\\end{pmatrix}\\] with \\(k\\) rows and \\(m\\) columns. We write \\(\\boldsymbol A \\in \\mathbb R^{k \\times m}\\). The value \\(a_{ij}\\) is called \\((i,j)\\)-th entry or \\((i,j)\\)-th component of \\(\\boldsymbol A\\). We also use the notation \\((\\boldsymbol A)_{i,j}\\) to denote the \\((i,j)\\)-th entry. A vector of length \\(k\\) is a \\(k \\times 1\\) matrix. A row vector of length \\(k\\) is a \\(1 \\times k\\) matrix. A scalar is a matrix of order \\(1 \\times 1\\).\nWe may describe a matrix \\(\\boldsymbol A\\) by its column or row vectors as \\[\n\\boldsymbol A = \\begin{pmatrix} \\boldsymbol a_1 & \\boldsymbol a_2 & \\ldots & \\boldsymbol a_m \\end{pmatrix}\n= \\begin{pmatrix} \\boldsymbol \\alpha_1 \\\\ \\vdots \\\\ \\boldsymbol \\alpha_k \\end{pmatrix},\n\\] where \\[\n\\boldsymbol a_i = \\begin{pmatrix} a_{1i} \\\\ \\vdots \\\\ a_{ki} \\end{pmatrix}\n\\] is the \\(i\\)-th column of \\(\\boldsymbol A\\) and \\(\\boldsymbol \\alpha_i = (a_{i1}, \\ldots, a_{im})\\) is the \\(i\\)-th row.",
+    "section": "",
+    "text": "1.1 Scalar, vector, and matrix\nLet’s start with some basic definitions and specific examples.\nA scalar \\(a\\) is a single real number. We write \\(a \\in \\mathbb R\\).\nA vector \\(\\boldsymbol a\\) of length \\(k\\) is a \\(k \\times 1\\) list of real numbers \\[\n\\boldsymbol a = \\begin{pmatrix} a_1 \\\\ a_2 \\\\ \\vdots \\\\ a_k \\end{pmatrix}.\n\\] By default, when we refer to a vector, we always mean a column vector. We write \\(\\boldsymbol a \\in \\mathbb R^k\\). The value \\(a_i\\) is called \\(i\\)-th entry or \\(i\\)-th component of \\(\\boldsymbol a\\). A scalar is a vector of length 1. A row vector of length \\(k\\) is written as \\(\\boldsymbol b = (b_1, \\ldots, b_k)\\).\nA matrix \\(\\boldsymbol A\\) of order \\(k \\times m\\) is a rectangular array of real numbers \\[\\boldsymbol A =\\begin{pmatrix}\n             a_{11} & a_{12} & \\cdots & a_{1m}\\\\\n             a_{21} & a_{22} & \\cdots & a_{2m}\\\\\n             \\vdots & \\vdots &       & \\vdots\\\\\n             a_{k1} & a_{k2} & \\cdots & a_{km}\n\\end{pmatrix}\\] with \\(k\\) rows and \\(m\\) columns. We write \\(\\boldsymbol A \\in \\mathbb R^{k \\times m}\\). The value \\(a_{ij}\\) is called \\((i,j)\\)-th entry or \\((i,j)\\)-th component of \\(\\boldsymbol A\\). We also use the notation \\((\\boldsymbol A)_{i,j}\\) to denote the \\((i,j)\\)-th entry. A vector of length \\(k\\) is a \\(k \\times 1\\) matrix. A row vector of length \\(k\\) is a \\(1 \\times k\\) matrix. A scalar is a matrix of order \\(1 \\times 1\\).\nWe may describe a matrix \\(\\boldsymbol A\\) by its column or row vectors as \\[\n\\boldsymbol A = \\begin{pmatrix} \\boldsymbol a_1 & \\boldsymbol a_2 & \\ldots & \\boldsymbol a_m \\end{pmatrix}\n= \\begin{pmatrix} \\boldsymbol \\alpha_1 \\\\ \\vdots \\\\ \\boldsymbol \\alpha_k \\end{pmatrix},\n\\] where \\[\n\\boldsymbol a_i = \\begin{pmatrix} a_{1i} \\\\ \\vdots \\\\ a_{ki} \\end{pmatrix}\n\\] is the \\(i\\)-th column of \\(\\boldsymbol A\\) and \\(\\boldsymbol \\alpha_i = (a_{i1}, \\ldots, a_{im})\\) is the \\(i\\)-th row.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Basic definitions</span>"
     ]
@@ -70,10 +70,10 @@
     ]
   },
   {
-    "objectID": "02_multiplication.html#matrix-summation",
-    "href": "02_multiplication.html#matrix-summation",
+    "objectID": "02_multiplication.html",
+    "href": "02_multiplication.html",
     "title": "\n2  Sums and Products\n",
-    "section": "\n2.1 Matrix summation",
+    "section": "",
     "text": "2.1 Matrix summation\nLet \\(\\boldsymbol A\\) and \\(\\boldsymbol B\\) both be matrices of order \\(k \\times m\\). Their sum is defined componentwise: \\[\\boldsymbol{A} + \\boldsymbol{B}\n=\\begin{pmatrix}\na_{11}+ b_{11} & a_{12}+ b_{12} & \\cdots & a_{1m}+ b_{1m} \\\\\na_{21}+ b_{21} & a_{22}+ b_{22} & \\cdots & a_{2m}+ b_{2m} \\\\\n\\vdots        & \\vdots        &       & \\vdots        \\\\\na_{k1}+ b_{k1} & a_{k2}+ b_{k2} & \\cdots & a_{km}+ b_{km}\n\\end{pmatrix}.\\] Only two matrices of the same order can be added. Example: \\[\\boldsymbol{A}=\\begin{pmatrix}2&0\\\\1&5\\\\3&2\\end{pmatrix}\\,,\\quad\n\\boldsymbol{B}=\\begin{pmatrix}-1&1\\\\7&1\\\\-5&2\\end{pmatrix}\\,,\\quad\n\\boldsymbol{A}+\\boldsymbol{B}=\\begin{pmatrix}1&1\\\\8&6\\\\-2&4\\end{pmatrix}\\,.\\]\nThe matrix summation satisfies the following rules: \\[\\begin{array}{@{}rr@{\\ }c@{\\ }l@{}r@{}}\n\\text{(i)}    & \\boldsymbol{A}+\\boldsymbol{B}         &=& \\boldsymbol{B}+\\boldsymbol{A}\\,               &  \\text{(commutativity)} \\\\\n\\text{(ii)}   & (\\boldsymbol{A}+\\boldsymbol{B})+\\boldsymbol{C}  &=& \\boldsymbol{A}+(\\boldsymbol{B}+\\boldsymbol{C})\\,        &  \\text{(associativity)} \\\\\n\\text{(iii)}    & \\boldsymbol A + \\boldsymbol 0 &=& \\boldsymbol A &   {\\text{(identity element)}}     \\\\\n\\text{(iv)}   & (\\boldsymbol A + \\boldsymbol B)' &=& \\boldsymbol A' + \\boldsymbol B'     &\n{\\text{(transposition)}}          \n\\end{array}\\]",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sums and Products</span>"
@@ -120,10 +120,10 @@
     ]
   },
   {
-    "objectID": "03_inverse.html#linear-combination",
-    "href": "03_inverse.html#linear-combination",
+    "objectID": "03_inverse.html",
+    "href": "03_inverse.html",
     "title": "\n3  Rank and inverse\n",
-    "section": "\n3.1 Linear combination",
+    "section": "",
     "text": "3.1 Linear combination\nLet \\(\\boldsymbol x_1, \\ldots, \\boldsymbol x_n\\) be vectors of the same order, and let \\(\\lambda_1, \\ldots, \\lambda_n\\) be scalars. The vector \\[ \\lambda_1 \\boldsymbol x_1 + \\lambda_2 \\boldsymbol x_2 + \\ldots + \\lambda_n \\boldsymbol x_n \\]\nis called linear combination of \\(\\boldsymbol x_1, \\ldots, \\boldsymbol x_n\\). A linear combination can also be written as a matrix-vector product. Let \\(\\boldsymbol X =\\begin{pmatrix} \\boldsymbol x_1 & \\ldots & \\boldsymbol x_n \\end{pmatrix}\\) be the matrix with columns \\(\\boldsymbol x_1, \\ldots, \\boldsymbol x_n\\), and let \\(\\boldsymbol \\lambda = (\\lambda_1, \\ldots, \\lambda_n)'\\). Then, \\[ \\lambda_1 \\boldsymbol x_1 + \\lambda_2 \\boldsymbol x_2 + \\ldots + \\lambda_n \\boldsymbol x_n = \\boldsymbol X \\boldsymbol \\lambda.\\] The vectors \\(\\boldsymbol x_1, \\ldots, \\boldsymbol x_n\\) are called linearly dependent if at least one can be written as a linear combination of the others. That is, there exists a nonzero vector \\(\\boldsymbol \\lambda\\) with \\[\n\\boldsymbol X \\boldsymbol \\lambda = \\lambda_1 \\boldsymbol x_1 + \\ldots + \\lambda_n \\boldsymbol x_n = \\boldsymbol 0.\n\\] The vectors \\(\\boldsymbol x_1, \\ldots, \\boldsymbol x_n\\) are called linearly independent if \\[\n\\boldsymbol X \\boldsymbol \\lambda = \\lambda_1 \\boldsymbol x_1 + \\ldots + \\lambda_n \\boldsymbol x_n \\neq \\boldsymbol 0\n\\] for all nonzero vectors \\(\\boldsymbol \\lambda\\).\nTo check whether the vectors are linearly independent, we can solve the system of equations \\(\\boldsymbol X \\boldsymbol \\lambda = \\boldsymbol 0\\) by Gaussian elimination. If \\(\\boldsymbol \\lambda = \\boldsymbol 0\\) is the only solution, then the columns of \\(\\boldsymbol X\\) are linearly independent. If there is a solution \\(\\boldsymbol \\lambda\\) with \\(\\boldsymbol \\lambda \\neq \\boldsymbol 0\\), then the columns of \\(\\boldsymbol X\\) are linearly dependent.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rank and inverse</span>"
@@ -134,7 +134,7 @@
     "href": "03_inverse.html#column-rank",
     "title": "\n3  Rank and inverse\n",
     "section": "\n3.2 Column rank",
-    "text": "3.2 Column rank\nThe rank of a \\(k \\times m\\) matrix \\(\\boldsymbol A = \\begin{pmatrix} \\boldsymbol a_1 & \\ldots & \\boldsymbol a_m \\end{pmatrix}\\), written as \\(\\mathop{\\mathrm{rank}}(\\boldsymbol A)\\), is the number of linearly independent columns \\(\\boldsymbol a_i\\). We say that \\(\\boldsymbol A\\) has full column rank if \\(\\mathop{\\mathrm{rank}}(\\boldsymbol X) = m\\).\nThe identity matrix \\(\\boldsymbol I_k\\) has full column rank (i.e., \\(\\mathop{\\mathrm{rank}}(\\boldsymbol I_n) = k\\)). As another example, consider \\[\n\\boldsymbol X = \\begin{pmatrix} 2 & 1 & 4 \\\\ 0 & 1 & 2 \\end{pmatrix},\n\\] which has linearly dependent columns since the third column is a linear combination of the first two columns: \\[\n\\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix} = 1 \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} + 2 \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}.\n\\] The first two columns are linearly independent since \\(\\lambda_1 = 0\\) and \\(\\lambda_2 = 0\\) are the only solutions to the equation \\[\n\\lambda_1 \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} + \\lambda_2 \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix}.\n\\] Therefore, we have \\(\\mathop{\\mathrm{rank}}(\\boldsymbol X) = 2\\), i.e., \\(\\boldsymbol X\\) does not have a full column rank.\nSome useful properties are\n\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A) \\leq \\min(k,m)\\)\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A) = \\mathop{\\mathrm{rank}}(\\boldsymbol A')\\)\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A \\boldsymbol B) = \\min(\\mathop{\\mathrm{rank}}(\\boldsymbol A), \\mathop{\\mathrm{rank}}(\\boldsymbol B))\\)\n\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A) = \\mathop{\\mathrm{rank}}(\\boldsymbol A' \\boldsymbol A) = \\mathop{\\mathrm{rank}}(\\boldsymbol A \\boldsymbol A')\\).\n\nWe can use the qr() function to extract the rank in R. Let’s compute the rank of the matrices \\[\n\\boldsymbol A = \\begin{pmatrix}\n1 & 2 & 3 \\\\ 3 & 9 & 1 \\\\ 0 & 11 & 5\n\\end{pmatrix},\n\\] \\(\\boldsymbol B = \\boldsymbol I_3\\), and \\(\\boldsymbol X\\) from the example above:\n\nA = matrix(c(1,3,0,2,9,11,3,1,5), nrow=3)\nqr(A)$rank\n\n[1] 3\n\nB = matrix(c(1,1,1,1,1,1,1,1,1), nrow=3)\nqr(B)$rank\n\n[1] 1\n\nX = matrix(c(2,0,1,1,4,2), ncol=3)\nqr(X)$rank\n\n[1] 2",
+    "text": "3.2 Column rank\nThe rank of a \\(k \\times m\\) matrix \\(\\boldsymbol A = \\begin{pmatrix} \\boldsymbol a_1 & \\ldots & \\boldsymbol a_m \\end{pmatrix}\\), written as \\(\\mathop{\\mathrm{rank}}(\\boldsymbol A)\\), is the number of linearly independent columns \\(\\boldsymbol a_i\\). We say that \\(\\boldsymbol A\\) has full column rank if \\(\\mathop{\\mathrm{rank}}(\\boldsymbol X) = m\\).\nThe identity matrix \\(\\boldsymbol I_k\\) has full column rank (i.e., \\(\\mathop{\\mathrm{rank}}(\\boldsymbol I_n) = k\\)). As another example, consider \\[\n\\boldsymbol X = \\begin{pmatrix} 2 & 1 & 4 \\\\ 0 & 1 & 2 \\end{pmatrix},\n\\] which has linearly dependent columns since the third column is a linear combination of the first two columns: \\[\n\\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix} = 1 \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} + 2 \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}.\n\\] The first two columns are linearly independent since \\(\\lambda_1 = 0\\) and \\(\\lambda_2 = 0\\) are the only solutions to the equation \\[\n\\lambda_1 \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} + \\lambda_2 \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix}.\n\\] Therefore, we have \\(\\mathop{\\mathrm{rank}}(\\boldsymbol X) = 2\\), i.e., \\(\\boldsymbol X\\) does not have a full column rank.\nSome useful properties are\n\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A) \\leq \\min(k,m)\\)\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A) = \\mathop{\\mathrm{rank}}(\\boldsymbol A')\\)\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A \\boldsymbol B)\\leq \\min(\\mathop{\\mathrm{rank}}(\\boldsymbol A), \\mathop{\\mathrm{rank}}(\\boldsymbol B))\\)\n\n\\(\\mathop{\\mathrm{rank}}(\\boldsymbol A) = \\mathop{\\mathrm{rank}}(\\boldsymbol A' \\boldsymbol A) = \\mathop{\\mathrm{rank}}(\\boldsymbol A \\boldsymbol A')\\).\n\nWe can use the qr() function to extract the rank in R. Let’s compute the rank of the matrices \\[\n\\boldsymbol A = \\begin{pmatrix}\n1 & 2 & 3 \\\\ 3 & 9 & 1 \\\\ 0 & 11 & 5\n\\end{pmatrix},\n\\] \\(\\boldsymbol B = \\boldsymbol I_3\\), and \\(\\boldsymbol X\\) from the example above:\n\nA = matrix(c(1,3,0,2,9,11,3,1,5), nrow=3)\nqr(A)$rank\n\n[1] 3\n\nB = matrix(c(1,1,1,1,1,1,1,1,1), nrow=3)\nqr(B)$rank\n\n[1] 1\n\nX = matrix(c(2,0,1,1,4,2), ncol=3)\nqr(X)$rank\n\n[1] 2",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rank and inverse</span>"
     ]
@@ -170,11 +170,21 @@
     ]
   },
   {
+    "objectID": "04_furtherconcepts.html",
+    "href": "04_furtherconcepts.html",
+    "title": "\n4  Advanced concepts\n",
+    "section": "",
+    "text": "4.1 Trace\nThe trace of a \\(k \\times k\\) square matrix \\(\\boldsymbol A\\) is the sum of the diagonal entries: \\[\\mathop{\\mathrm{tr}}(\\boldsymbol A) = \\sum_{i=1}^n a_{ii}\\] Example: \\[\n\\boldsymbol A = \\begin{pmatrix}\n1 & 2 & 3 \\\\ 3 & 9 & 1 \\\\ 0 & 11 & 5\n\\end{pmatrix} \\quad \\Rightarrow \\quad \\mathop{\\mathrm{tr}}(\\boldsymbol A) = 1+9+5 = 15\n\\] In Rwe have\nA = matrix(c(1,3,0,2,9,11,3,1,5), nrow=3)\nsum(diag(A))  #trace = sum of diagonal entries\n\n[1] 15\nThe following properties hold for square matrices \\(\\boldsymbol A\\) and \\(\\boldsymbol B\\) and scalars \\(\\lambda\\):\nFor \\(\\boldsymbol A\\in \\mathbb R^{k \\times m}\\) and \\(\\boldsymbol B \\in \\mathbb R^{m \\times k}\\) we have \\[\n\\mathop{\\mathrm{tr}}(\\boldsymbol A \\boldsymbol B) = \\mathop{\\mathrm{tr}}(\\boldsymbol B \\boldsymbol A).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Advanced concepts</span>"
+    ]
+  },
+  {
     "objectID": "04_furtherconcepts.html#trace",
     "href": "04_furtherconcepts.html#trace",
     "title": "\n4  Advanced concepts\n",
-    "section": "\n4.1 Trace",
-    "text": "4.1 Trace\nThe trace of a \\(k \\times k\\) square matrix \\(\\boldsymbol A\\) is the sum of the diagonal entries: \\[\\mathop{\\mathrm{tr}}(\\boldsymbol A) = \\sum_{i=1}^n a_{ii}\\] Example: \\[\n\\boldsymbol A = \\begin{pmatrix}\n1 & 2 & 3 \\\\ 3 & 9 & 1 \\\\ 0 & 11 & 5\n\\end{pmatrix} \\quad \\Rightarrow \\quad \\mathop{\\mathrm{tr}}(\\boldsymbol A) = 1+9+5 = 15\n\\] In Rwe have\n\nA = matrix(c(1,3,0,2,9,11,3,1,5), nrow=3)\nsum(diag(A))  #trace = sum of diagonal entries\n\n[1] 15\n\n\nThe following properties hold for square matrices \\(\\boldsymbol A\\) and \\(\\boldsymbol B\\) and scalars \\(\\lambda\\):\n\n\\(\\mathop{\\mathrm{tr}}(\\lambda \\boldsymbol A) = \\lambda \\mathop{\\mathrm{tr}}(\\boldsymbol A)\\)\n\\(\\mathop{\\mathrm{tr}}(\\boldsymbol A + \\boldsymbol B) = \\mathop{\\mathrm{tr}}(\\boldsymbol A) + \\mathop{\\mathrm{tr}}(\\boldsymbol B)\\)\n\\(\\mathop{\\mathrm{tr}}(\\boldsymbol A') = \\mathop{\\mathrm{tr}}(\\boldsymbol A)\\)\n\\(\\mathop{\\mathrm{tr}}(\\boldsymbol I_k) = k\\)\n\nFor \\(\\boldsymbol A\\in \\mathbb R^{k \\times m}\\) and \\(\\boldsymbol B \\in \\mathbb R^{m \\times k}\\) we have \\[\n\\mathop{\\mathrm{tr}}(\\boldsymbol A \\boldsymbol B) = \\mathop{\\mathrm{tr}}(\\boldsymbol B \\boldsymbol A).\n\\]",
+    "section": "",
+    "text": "\\(\\mathop{\\mathrm{tr}}(\\lambda \\boldsymbol A) = \\lambda \\mathop{\\mathrm{tr}}(\\boldsymbol A)\\)\n\\(\\mathop{\\mathrm{tr}}(\\boldsymbol A + \\boldsymbol B) = \\mathop{\\mathrm{tr}}(\\boldsymbol A) + \\mathop{\\mathrm{tr}}(\\boldsymbol B)\\)\n\\(\\mathop{\\mathrm{tr}}(\\boldsymbol A') = \\mathop{\\mathrm{tr}}(\\boldsymbol A)\\)\n\\(\\mathop{\\mathrm{tr}}(\\boldsymbol I_k) = k\\)",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Advanced concepts</span>"
     ]
@@ -250,11 +260,11 @@
     ]
   },
   {
-    "objectID": "05_calculus.html#gradient",
-    "href": "05_calculus.html#gradient",
+    "objectID": "05_calculus.html",
+    "href": "05_calculus.html",
     "title": "5  Matrix calculus",
-    "section": "5.1 Gradient",
-    "text": "5.1 Gradient\nThe first derivatives vector or gradient is \\[\n\\frac{\\partial f(\\boldsymbol \\beta)}{\\partial\\boldsymbol{\\beta}}  = \\begin{pmatrix}\\frac{\\partial f(\\boldsymbol \\beta)}{\\partial \\beta_1} \\\\ \\vdots \\\\ \\frac{\\partial f(\\boldsymbol \\beta)}{\\partial \\beta_k} \\end{pmatrix}\n\\] If the gradient is evaluated at some particular value \\(\\boldsymbol \\beta = \\boldsymbol b\\), we write \\[\n\\frac{\\partial f}{\\partial\\boldsymbol{\\beta}}(\\boldsymbol b)\n\\] Useful properties for inner product and sandwich forms are \\[\\begin{align*}\n(i)& \\quad &&\\frac{\\partial (\\boldsymbol a' \\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}  = \\boldsymbol a \\\\\n(ii)& \\quad &&\\frac{\\partial ( \\boldsymbol \\beta' \\boldsymbol A \\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}   = (\\boldsymbol A + \\boldsymbol A') \\boldsymbol \\beta.\n\\end{align*}\\]",
+    "section": "",
+    "text": "5.1 Gradient\nLet \\(f(\\beta_1, \\ldots, \\beta_k) = f(\\boldsymbol{\\beta})\\) be a twice-differential real-valued function that depends on some vector \\(\\boldsymbol \\beta = (\\beta_1, \\ldots, \\beta_k)'\\). Examples that frequently appear in econometrics are functions of the inner product form \\(f(\\boldsymbol \\beta) = \\boldsymbol a' \\boldsymbol \\beta\\), where \\(\\boldsymbol a \\in \\mathbb R^k\\), and functions of the sandwich form \\(f(\\boldsymbol \\beta) = \\boldsymbol \\beta' \\boldsymbol A \\boldsymbol \\beta\\), where \\(\\boldsymbol A \\in \\mathbb R^{k \\times k}\\).\nThe first derivatives vector or gradient is \\[\n\\frac{\\partial f(\\boldsymbol \\beta)}{\\partial\\boldsymbol{\\beta}}  = \\begin{pmatrix}\\frac{\\partial f(\\boldsymbol \\beta)}{\\partial \\beta_1} \\\\ \\vdots \\\\ \\frac{\\partial f(\\boldsymbol \\beta)}{\\partial \\beta_k} \\end{pmatrix}\n\\] If the gradient is evaluated at some particular value \\(\\boldsymbol \\beta = \\boldsymbol b\\), we write \\[\n\\frac{\\partial f}{\\partial\\boldsymbol{\\beta}}(\\boldsymbol b)\n\\] Useful properties for inner product and sandwich forms are \\[\\begin{align*}\n(i)& \\quad &&\\frac{\\partial (\\boldsymbol a' \\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}  = \\boldsymbol a \\\\\n(ii)& \\quad &&\\frac{\\partial ( \\boldsymbol \\beta' \\boldsymbol A \\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}   = (\\boldsymbol A + \\boldsymbol A') \\boldsymbol \\beta.\n\\end{align*}\\]",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Matrix calculus</span>"
     ]
@@ -277,6 +287,16 @@
     "text": "5.3 Optimization\nRecall the first-order (necessary) and second-order (sufficient) conditions for optimum (maximum or minimum) in the univariate case:\n\nFirst-order condition: the first derivative evaluated at the optimum is zero.\nSecond-order condition: the second derivative at the optimum is negative for a maximum and positive for a minimum.\n\nSimilarly, we formulate first and second-order conditions for a function \\(f(\\boldsymbol \\beta)\\). The first-order condition for an optimum (maximum or minimum) at \\(\\boldsymbol b\\) is \\[\n  \\frac{\\partial f}{\\partial\\boldsymbol{\\beta}}(\\boldsymbol b)  = \\boldsymbol 0.\n\\] The second-order condition is \\[\\begin{align*}\n  &\\frac{\\partial^2 f}{\\partial\\boldsymbol{\\beta }\\partial \\boldsymbol{\\beta}'}(\\boldsymbol b) &gt; 0 \\quad \\text{for a minimum at} \\ \\boldsymbol b, \\\\\n  &\\frac{\\partial^2 f}{\\partial\\boldsymbol{\\beta }\\partial \\boldsymbol{\\beta}'}(\\boldsymbol b) &lt; 0 \\quad \\text{for a maximum at} \\ \\boldsymbol b.\n\\end{align*}\\] Recall that, in the context of matrices, the notation “\\(&gt; 0\\)” means positive definite, and “\\(&lt; 0\\)” means negative definite.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Matrix calculus</span>"
+    ]
+  },
+  {
+    "objectID": "06_exercises.html",
+    "href": "06_exercises.html",
+    "title": "6  Problems",
+    "section": "",
+    "text": "Problem 1\nConsider the matrix \\[\n\\boldsymbol A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Problems</span>"
     ]
   },
   {
